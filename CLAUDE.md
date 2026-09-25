@@ -52,6 +52,20 @@ Le type TypeScript correspondant (`Album`) est déjà défini dans
 6. **Déploiement**
    Variables d'environnement (DB, clés Stripe), build de production.
 
+   Checklist avant la mise en ligne :
+   - [ ] **Resend — vérifier le domaine** du site (resend.com > Domains >
+     Add Domain) et ajouter chez l'hébergeur DNS les enregistrements
+     SPF/DKIM indiqués. Possible avant le déploiement : seul l'accès DNS
+     est nécessaire.
+   - [ ] **Resend — `CONTACT_FROM_EMAIL`** : adresse du domaine vérifié,
+     ex. `"Site Indigo <contact@indigoprod.fr>"` (sinon
+     `onboarding@resend.dev`, qui n'envoie qu'à l'email du compte Resend).
+   - [ ] **Resend — `CONTACT_TO_EMAIL`** : remettre
+     `"contact.indigoprod@gmail.com"` (en dev il pointe vers
+     `slimdev20@gmail.com`, l'email du compte Resend).
+   - [ ] Reporter sur l'hébergeur toutes les variables de `.env.example`
+     (`DATABASE_URL`, `DIRECT_URL`, `RESEND_API_KEY`, `CONTACT_*`).
+
 ## Notes techniques
 
 - Ce projet utilise une version de Next.js avec des breaking changes par
