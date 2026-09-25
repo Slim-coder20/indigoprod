@@ -6,6 +6,7 @@
   --cream: #e7e4d8;
   --cream-dim: #ddddce;
   --mauve: #deaad2;
+  --mauve-dark: #873463;
   --olive: #655e36;
   --lime: #eef16d;
 
@@ -58,6 +59,8 @@
   --color-on-band: var(--on-band);
   --color-on-band-muted: var(--on-band-muted);
 
+  --animate-marquee: marquee 40s linear infinite;
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -70,4 +73,10 @@ body {
 ::selection {
   background: var(--lime);
   color: var(--ink);
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
 }

@@ -24,7 +24,7 @@ export default function About() {
         À propos
       </p>
       <h1 className="mt-3 max-w-2xl text-4xl font-semibold tracking-tight text-foreground">
-        Qui sommes-nous ?
+        Qui <span className="text-[var(--mauve-dark)]">sommes-nous</span> ?
       </h1>
       <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">
         Indigo est une structure indépendante basée à Tours, fondée en 2024 par

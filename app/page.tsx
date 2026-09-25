@@ -2,14 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import Container from "@/components/Container";
 import AlbumCover from "@/components/AlbumCover";
-import ArtistAvatar from "@/components/ArtistAvatar";
+import ArtistCarousel from "@/components/ArtistCarousel";
 import { ARTISTS } from "@/lib/data/artists";
 import { ALBUMS } from "@/lib/data/albums";
 import { CONCERTS } from "@/lib/data/concerts";
 import logo from "@/public/logo-indigo.png";
 
 export default function Home() {
-  const featuredArtists = ARTISTS.slice(0, 3);
   const featuredAlbums = ALBUMS.slice(0, 3);
   const nextConcerts = CONCERTS.slice(0, 3);
 
@@ -69,23 +68,9 @@ export default function Home() {
               Tous les artistes →
             </Link>
           </div>
-          <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-3">
-            {featuredArtists.map((artist) => (
-              <Link
-                key={artist.id}
-                href={`/artistes/${artist.id}`}
-                className="rounded-xl border border-line bg-surface p-6 transition-colors hover:border-line-strong"
-              >
-                <ArtistAvatar artist={artist} />
-                <p className="mt-4 text-lg font-semibold text-foreground">
-                  {artist.name}
-                </p>
-                <p className="mt-2 inline-block rounded-full bg-tag px-3 py-0.5 text-xs font-medium text-on-tag">
-                  {artist.genre}
-                </p>
-              </Link>
-            ))}
-          </div>
+        </Container>
+        <Container className="mt-8">
+          <ArtistCarousel artists={ARTISTS} />
         </Container>
       </section>
 
