@@ -10,13 +10,13 @@ export default function Artistes() {
         Artistes
       </p>
       <h1 className="mt-3 max-w-2xl text-4xl font-semibold tracking-tight text-foreground">
-        Le roster IndigoProduction
+        Le roster Indigo <span className="text-[var(--mauve-dark)]">Production</span>
       </h1>
       <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">
         Des univers musicaux variés, portés par une même exigence artistique.
       </p>
 
-      <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {ARTISTS.map((artist) => (
           <Link
             key={artist.id}
@@ -29,7 +29,7 @@ export default function Artistes() {
                   src={artist.photo}
                   alt={artist.name}
                   fill
-                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                   style={{ objectPosition: artist.photoPosition }}
                 />

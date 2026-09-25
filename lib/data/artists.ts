@@ -101,6 +101,26 @@ export const ARTISTS: Artist[] = [
       { label: "YouTube", url: "https://www.youtube.com/@eliegarcia1776" },
     ],
   },
+  {
+    id: "django-jazz-quartet",
+    name: "Django Jazz Quartet",
+    role: "Quartet de jazz manouche",
+    genre: "Jazz manouche",
+    bio: "Django Jazz Quartet, la fusion de quatre musiciens passionnés par l'œuvre de Django Reinhardt et Stéphane Grappelli. Un style Jazz Manouche sur mesure pour accompagner le Chant Tzigane en authentique langue Romanès.",
+    initials: "DJ",
+    photo: "/artistes/django-jazz-quartet.webp",
+    socials: [
+      {
+        label: "Instagram",
+        url: "https://www.instagram.com/djangojazzquartet/",
+      },
+      {
+        label: "Facebook",
+        url: "https://www.facebook.com/profile.php?id=61586175928769",
+      },
+      { label: "YouTube", url: "https://www.youtube.com/@DjangoJazzQuartet" },
+    ],
+  },
 ];
 
 export function getArtist(id: string): Artist | undefined {
