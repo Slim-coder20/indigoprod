@@ -72,6 +72,15 @@ export const ARTISTS: Artist[] = [
     initials: "DS",
     photo: "/artistes/da-silva.webp",
     photoPosition: "center 5%",
+    socials: [
+      { label: "Instagram", url: "https://www.instagram.com/dasilvaofficiel/" },
+      { label: "Facebook", url: "https://www.facebook.com/DaSilva.Officiel" },
+      { label: "YouTube", url: "https://www.youtube.com/@OfficielDaSilva" },
+      {
+        label: "Spotify",
+        url: "https://open.spotify.com/artist/2DOrhe8H1WfcD6PPkgJH8X",
+      },
+    ],
   },
   {
     id: "duo-garcia",
