@@ -1,9 +1,12 @@
+import Image from "next/image";
 import Link from "next/link";
 import Container from "@/components/Container";
 import AlbumCover from "@/components/AlbumCover";
+import ArtistAvatar from "@/components/ArtistAvatar";
 import { ARTISTS } from "@/lib/data/artists";
 import { ALBUMS } from "@/lib/data/albums";
 import { CONCERTS } from "@/lib/data/concerts";
+import logo from "@/public/logo-indigo.png";
 
 export default function Home() {
   const featuredArtists = ARTISTS.slice(0, 3);
@@ -13,31 +16,42 @@ export default function Home() {
   return (
     <>
       <section className="border-b border-line bg-background">
-        <Container className="flex flex-col items-start gap-6 py-24 sm:py-32">
-          <p className="text-sm font-medium uppercase tracking-widest text-highlight">
-            Maison de production musicale
-          </p>
-          <h1 className="max-w-2xl text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
-            Nous révélons des artistes, nous produisons des{" "}
-            <span className="rounded-md bg-lime px-2">émotions</span>.
-          </h1>
-          <p className="max-w-xl text-lg leading-8 text-muted">
-            IndigoProduction accompagne ses artistes de l&apos;enregistrement
-            à la scène : albums, tournées et boutique en ligne.
-          </p>
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <Link
-              href="/artistes"
-              className="rounded-full bg-accent px-6 py-3 text-sm font-semibold text-on-accent transition-colors hover:bg-accent-hover"
-            >
-              Découvrir nos artistes
-            </Link>
-            <Link
-              href="/boutique"
-              className="rounded-full border border-line-strong px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:border-accent hover:text-accent"
-            >
-              Voir la boutique
-            </Link>
+        <Container className="grid grid-cols-1 items-center gap-12 py-24 sm:py-32 lg:grid-cols-2">
+          <div className="flex flex-col items-start gap-6">
+            <p className="text-sm font-medium uppercase tracking-widest text-highlight">
+              Maison de production musicale
+            </p>
+            <h1 className="max-w-2xl text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+              Nous révélons des artistes, nous produisons des{" "}
+              <span className="text-yellow-500">émotions</span>
+            </h1>
+            <p className="max-w-xl text-lg leading-8 text-muted">
+              IndigoProduction accompagne ses artistes de l&apos;enregistrement
+              à la scène : albums, tournées et boutique en ligne.
+            </p>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="/artistes"
+                className="rounded-full bg-accent px-6 py-3 text-sm font-semibold text-on-accent transition-colors hover:bg-accent-hover"
+              >
+                Découvrir nos artistes
+              </Link>
+              <Link
+                href="/boutique"
+                className="rounded-full border border-line-strong px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:border-accent hover:text-accent"
+              >
+                Voir la boutique
+              </Link>
+            </div>
+          </div>
+
+          <div className="flex justify-center lg:justify-end">
+            <Image
+              src={logo}
+              alt="Logo Indigo"
+              loading="eager"
+              className="h-auto w-full max-w-sm"
+            />
           </div>
         </Container>
       </section>
@@ -57,20 +71,19 @@ export default function Home() {
           </div>
           <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-3">
             {featuredArtists.map((artist) => (
-              <div
+              <Link
                 key={artist.id}
-                className="rounded-xl border border-line bg-surface p-6"
+                href={`/artistes/${artist.id}`}
+                className="rounded-xl border border-line bg-surface p-6 transition-colors hover:border-line-strong"
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-ink text-sm font-semibold text-lime">
-                  {artist.initials}
-                </div>
+                <ArtistAvatar artist={artist} />
                 <p className="mt-4 text-lg font-semibold text-foreground">
                   {artist.name}
                 </p>
                 <p className="mt-2 inline-block rounded-full bg-tag px-3 py-0.5 text-xs font-medium text-on-tag">
                   {artist.genre}
                 </p>
-              </div>
+              </Link>
             ))}
           </div>
         </Container>

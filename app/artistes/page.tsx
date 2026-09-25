@@ -1,3 +1,5 @@
+import Image from "next/image";
+import Link from "next/link";
 import Container from "@/components/Container";
 import { ARTISTS } from "@/lib/data/artists";
 
@@ -16,23 +18,48 @@ export default function Artistes() {
 
       <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {ARTISTS.map((artist) => (
-          <div
+          <Link
             key={artist.id}
-            className="rounded-xl border border-line bg-surface p-6"
+            href={`/artistes/${artist.id}`}
+            className="group flex flex-col overflow-hidden rounded-xl border border-line bg-surface transition-colors hover:border-line-strong"
           >
-            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-ink text-base font-semibold text-lime">
-              {artist.initials}
+            {artist.photo ? (
+              <div className="relative aspect-[3/2] w-full overflow-hidden bg-ink">
+                <Image
+                  src={artist.photo}
+                  alt={artist.name}
+                  fill
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  style={{ objectPosition: artist.photoPosition }}
+                />
+              </div>
+            ) : (
+              <div className="flex aspect-[3/2] w-full items-center justify-center bg-ink">
+                <span className="text-4xl font-semibold text-lime">
+                  {artist.initials}
+                </span>
+              </div>
+            )}
+
+            <div className="flex flex-1 flex-col p-6">
+              <p className="text-lg font-semibold text-foreground">
+                {artist.name}
+              </p>
+              {artist.role && (
+                <p className="text-sm text-subtle">{artist.role}</p>
+              )}
+              <p className="mt-2 w-fit rounded-full bg-tag px-3 py-0.5 text-xs font-medium text-on-tag">
+                {artist.genre}
+              </p>
+              <p className="mt-3 line-clamp-3 text-sm leading-6 text-muted">
+                {artist.bio}
+              </p>
+              <p className="mt-auto pt-4 text-sm font-medium text-highlight group-hover:text-foreground">
+                Découvrir →
+              </p>
             </div>
-            <p className="mt-4 text-lg font-semibold text-foreground">
-              {artist.name}
-            </p>
-            <p className="mt-2 inline-block rounded-full bg-tag px-3 py-0.5 text-xs font-medium text-on-tag">
-              {artist.genre}
-            </p>
-            <p className="mt-3 text-sm leading-6 text-muted">
-              {artist.bio}
-            </p>
-          </div>
+          </Link>
         ))}
       </div>
     </Container>
