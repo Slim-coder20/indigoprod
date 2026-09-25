@@ -61,3 +61,5 @@ Le type TypeScript correspondant (`Album`) est déjà défini dans
 - `params`/`searchParams` sont des `Promise` dans les pages/layouts qui en
   ont (routes dynamiques à venir, ex. `/artistes/[slug]`).
 - `middleware.ts` est renommé `proxy.ts` dans cette version.
+
+## données textuel a intégrer dans le site 

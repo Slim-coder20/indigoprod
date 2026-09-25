@@ -39,9 +39,16 @@ export default function Footer() {
         <div>
           <p className="text-sm font-semibold text-foreground">Nous suivre</p>
           <ul className="mt-3 flex flex-col gap-2">
-            {["Instagram", "Spotify", "YouTube"].map((social) => (
-              <li key={social}>
-                <span className="text-sm text-muted">{social}</span>
+            {CONTACT.socials.map((social) => (
+              <li key={social.label}>
+                <a
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-muted transition-colors hover:text-foreground"
+                >
+                  {social.label} ↗
+                </a>
               </li>
             ))}
           </ul>
