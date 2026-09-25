@@ -1,6 +1,4 @@
 // Schéma de la base Supabase "indigoProduction".
-// Tables prévues : Product, Order, Artist, Album, Concert.
-// Les champs de chaque table seront définis au fur et à mesure.
 
 generator client {
   provider = "prisma-client"
@@ -9,4 +7,123 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+}
+
+// ─── Catalogue artistique ──────────────────────────────────────────────
+
+model Artist {
+  id          String    @id @default(cuid())
+  slug        String    @unique // utilisé dans l'URL /artistes/[slug]
+  name        String
+  role        String?
+  genre       String
+  bio         String // résumé court affiché sur les cartes
+  biography   String[] // un paragraphe par entrée
+  photoUrl    String?
+  photoCredit String?
+  videoUrl    String?
+  socials     Json? // [{ label: "Instagram", url: "..." }, ...]
+  albums      Album[]
+  concerts    Concert[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("artists")
+}
+
+model Album {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  title       String
+  releaseDate DateTime  @db.Date
+  coverUrl    String?
+  artistId    String
+  artist      Artist    @relation(fields: [artistId], references: [id], onDelete: Cascade)
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([artistId])
+  @@map("albums")
+}
+
+model Concert {
+  id        String   @id @default(cuid())
+  venue     String
+  city      String
+  date      DateTime
+  ticketUrl String?
+  artistId  String
+  artist    Artist   @relation(fields: [artistId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([artistId, date])
+  @@map("concerts")
+}
+
+// ─── Boutique ──────────────────────────────────────────────────────────
+
+enum ProductType {
+  ALBUM
+  MERCH
+}
+
+model Product {
+  id           String      @id @default(cuid())
+  name         String
+  description  String?
+  type         ProductType @default(ALBUM)
+  priceCents   Int // prix en centimes, comme Stripe (19,90 € = 1990)
+  stock        Int // stock initial
+  stockRestant Int // stock restant disponible à la vente
+  imageUrl     String?
+  active       Boolean     @default(true)
+  albumId      String? // renseigné quand le produit est un album
+  album        Album?      @relation(fields: [albumId], references: [id], onDelete: SetNull)
+  orderItems   OrderItem[]
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  @@index([albumId])
+  @@map("products")
+}
+
+enum OrderStatus {
+  PENDING // session Stripe créée, paiement pas encore confirmé
+  PAID // confirmé par le webhook Stripe
+  CANCELLED
+  REFUNDED
+}
+
+model Order {
+  id                    String      @id @default(cuid())
+  email                 String
+  customerName          String?
+  status                OrderStatus @default(PENDING)
+  totalCents            Int
+  currency              String      @default("eur")
+  stripeSessionId       String?     @unique
+  stripePaymentIntentId String?     @unique
+  items                 OrderItem[]
+  createdAt             DateTime    @default(now())
+  updatedAt             DateTime    @updatedAt
+
+  @@index([email])
+  @@map("orders")
+}
+
+// Ligne de commande : un produit, sa quantité et son prix au moment de l'achat
+model OrderItem {
+  id             String  @id @default(cuid())
+  quantity       Int
+  unitPriceCents Int
+  orderId        String
+  order          Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId      String
+  product        Product @relation(fields: [productId], references: [id], onDelete: Restrict)
+
+  @@index([orderId])
+  @@index([productId])
+  @@map("order_items")
 }
