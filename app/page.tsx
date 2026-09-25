@@ -3,14 +3,14 @@ import Link from "next/link";
 import Container from "@/components/Container";
 import ArtistCarousel from "@/components/ArtistCarousel";
 import { getArtists } from "@/lib/queries/artists";
-import ReleaseCover from "@/components/ReleaseCover";
-import { formatPrice, getReleases } from "@/lib/queries/releases";
+import ReleaseCarousel from "@/components/ReleaseCarousel";
+import { getReleases } from "@/lib/queries/releases";
 import { formatConcertDate, getUpcomingConcerts } from "@/lib/queries/concerts";
 import logo from "@/public/logo-indigo.png";
 
 export default async function Home() {
   const artists = await getArtists();
-  const latestReleases = (await getReleases()).slice(0, 3);
+  const releases = await getReleases();
   const nextConcerts = (await getUpcomingConcerts()).slice(0, 3);
 
   return (
@@ -88,46 +88,9 @@ export default async function Home() {
               Toute la boutique →
             </Link>
           </div>
-          <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-3">
-            {latestReleases.map((release, index) => (
-              <div
-                key={release.id}
-                className="rounded-xl border border-line bg-surface p-6 transition-colors hover:border-line-strong"
-              >
-                <ReleaseCover
-                  release={release}
-                  index={index}
-                  sizes="(min-width: 640px) 33vw, 100vw"
-                />
-                <div className="mt-4 flex items-center gap-2">
-                  <p className="text-lg font-semibold text-foreground">
-                    {release.title}
-                  </p>
-                  {release.type === "SINGLE" && (
-                    <span className="rounded-full bg-tag px-2.5 py-0.5 text-xs font-medium text-on-tag">
-                      Single
-                    </span>
-                  )}
-                </div>
-                <p className="text-sm text-muted">{release.artistName}</p>
-                {release.products.length > 0 ? (
-                  <p className="mt-2 text-sm font-semibold text-highlight">
-                    {release.products.length > 1 && "À partir de "}
-                    {formatPrice(release.products[0].priceCents)}
-                  </p>
-                ) : release.listenUrl ? (
-                  <a
-                    href={release.listenUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-2 inline-block text-sm font-semibold text-highlight transition-colors hover:text-foreground"
-                  >
-                    Écoute libre sur Spotify ↗
-                  </a>
-                ) : null}
-              </div>
-            ))}
-          </div>
+        </Container>
+        <Container className="mt-8">
+          <ReleaseCarousel releases={releases} />
         </Container>
       </section>
 

@@ -1,27 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
+import Marquee from "@/components/Marquee";
 import type { Artist } from "@/lib/data/artists";
 
-// Carrousel en défilement continu : la liste est dupliquée et translatée
-// de -50 % en boucle. Pause au survol / au focus, et défilement manuel
-// si l'utilisateur a demandé à réduire les animations.
+// Carrousel des artistes de l'accueil.
 export default function ArtistCarousel({ artists }: { artists: Artist[] }) {
   return (
-    <div className="group relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)] motion-reduce:overflow-x-auto motion-reduce:[mask-image:none]">
-      <ul className="flex w-max animate-marquee group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused] motion-reduce:animate-none">
-        {[0, 1].map((copy) =>
-          artists.map((artist) => (
-            <li
-              key={`${copy}-${artist.id}`}
-              aria-hidden={copy === 1 ? true : undefined}
-              className={`w-72 shrink-0 pr-6 ${copy === 1 ? "motion-reduce:hidden" : ""}`}
-            >
-              <ArtistCard artist={artist} focusable={copy === 0} />
-            </li>
-          )),
-        )}
-      </ul>
-    </div>
+    <Marquee
+      items={artists}
+      getKey={(artist) => artist.id}
+      renderItem={(artist, focusable) => (
+        <ArtistCard artist={artist} focusable={focusable} />
+      )}
+    />
   );
 }
 
