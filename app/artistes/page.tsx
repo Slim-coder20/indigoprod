@@ -1,23 +1,26 @@
 import Image from "next/image";
 import Link from "next/link";
 import Container from "@/components/Container";
-import { ARTISTS } from "@/lib/data/artists";
+import { getArtists } from "@/lib/queries/artists";
 
-export default function Artistes() {
+export default async function Artistes() {
+  const artists = await getArtists();
+
   return (
     <Container className="py-20">
       <p className="text-sm font-medium uppercase tracking-widest text-highlight">
         Artistes
       </p>
       <h1 className="mt-3 max-w-2xl text-4xl font-semibold tracking-tight text-foreground">
-        Le roster Indigo <span className="text-[var(--mauve-dark)]">Production</span>
+        Le roster Indigo{" "}
+        <span className="text-[var(--mauve-dark)]">Production</span>
       </h1>
       <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">
         Des univers musicaux variés, portés par une même exigence artistique.
       </p>
 
       <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {ARTISTS.map((artist) => (
+        {artists.map((artist) => (
           <Link
             key={artist.id}
             href={`/artistes/${artist.id}`}

@@ -3,12 +3,13 @@ import Link from "next/link";
 import Container from "@/components/Container";
 import AlbumCover from "@/components/AlbumCover";
 import ArtistCarousel from "@/components/ArtistCarousel";
-import { ARTISTS } from "@/lib/data/artists";
+import { getArtists } from "@/lib/queries/artists";
 import { ALBUMS } from "@/lib/data/albums";
 import { CONCERTS } from "@/lib/data/concerts";
 import logo from "@/public/logo-indigo.png";
 
-export default function Home() {
+export default async function Home() {
+  const artists = await getArtists();
   const featuredAlbums = ALBUMS.slice(0, 3);
   const nextConcerts = CONCERTS.slice(0, 3);
 
@@ -22,7 +23,7 @@ export default function Home() {
             </p>
             <h1 className="max-w-2xl text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
               Nous révélons des artistes, nous produisons des{" "}
-              <span className="text-yellow-500">émotions</span>
+              <span className="text-[var(--mauve-dark)]">émotions</span>
             </h1>
             <p className="max-w-xl text-lg leading-8 text-muted">
               IndigoProduction accompagne ses artistes de l&apos;enregistrement
@@ -70,7 +71,7 @@ export default function Home() {
           </div>
         </Container>
         <Container className="mt-8">
-          <ArtistCarousel artists={ARTISTS} />
+          <ArtistCarousel artists={artists} />
         </Container>
       </section>
 

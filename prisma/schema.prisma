@@ -12,21 +12,24 @@ datasource db {
 // ─── Catalogue artistique ──────────────────────────────────────────────
 
 model Artist {
-  id          String    @id @default(cuid())
-  slug        String    @unique // utilisé dans l'URL /artistes/[slug]
-  name        String
-  role        String?
-  genre       String
-  bio         String // résumé court affiché sur les cartes
-  biography   String[] // un paragraphe par entrée
-  photoUrl    String?
-  photoCredit String?
-  videoUrl    String?
-  socials     Json? // [{ label: "Instagram", url: "..." }, ...]
-  albums      Album[]
-  concerts    Concert[]
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  id             String    @id @default(cuid())
+  slug           String    @unique // utilisé dans l'URL /artistes/[slug]
+  name           String
+  role           String?
+  genre          String
+  bio            String // résumé court affiché sur les cartes
+  biography      String[] // un paragraphe par entrée
+  photoUrl       String?
+  photoPosition  String? // cadrage CSS object-position, ex. "center 20%"
+  photoCredit    String?
+  videoUrl       String?
+  videoPosterUrl String? // image affichée avant la lecture
+  videoTitle     String?
+  socials        Json? // [{ label: "Instagram", url: "..." }, ...]
+  albums         Album[]
+  concerts       Concert[]
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
 
   @@map("artists")
 }

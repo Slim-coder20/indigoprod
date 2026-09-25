@@ -4,17 +4,18 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Container from "@/components/Container";
 import SocialLinks from "@/components/SocialLinks";
-import { ARTISTS, getArtist } from "@/lib/data/artists";
+import { getArtistBySlug, getArtists } from "@/lib/queries/artists";
 
-export function generateStaticParams() {
-  return ARTISTS.map((artist) => ({ slug: artist.id }));
+export async function generateStaticParams() {
+  const artists = await getArtists();
+  return artists.map((artist) => ({ slug: artist.id }));
 }
 
 export async function generateMetadata({
   params,
 }: PageProps<"/artistes/[slug]">): Promise<Metadata> {
   const { slug } = await params;
-  const artist = getArtist(slug);
+  const artist = await getArtistBySlug(slug);
   if (!artist) return {};
   return {
     title: `${artist.name} — IndigoProduction`,
@@ -26,7 +27,7 @@ export default async function ArtistePage({
   params,
 }: PageProps<"/artistes/[slug]">) {
   const { slug } = await params;
-  const artist = getArtist(slug);
+  const artist = await getArtistBySlug(slug);
   if (!artist) notFound();
 
   const paragraphs = artist.biography ?? [artist.bio];

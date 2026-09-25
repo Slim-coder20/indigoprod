@@ -1,3 +1,6 @@
+// Données des artistes utilisées par prisma/seed.ts pour remplir la table
+// `artists`. Le site lit la base via lib/queries/artists.ts.
+
 export type SocialLink = {
   label: "Site web" | "Instagram" | "Facebook" | "YouTube" | "Spotify";
   url: string;
@@ -124,7 +127,3 @@ export const ARTISTS: Artist[] = [
     ],
   },
 ];
-
-export function getArtist(id: string): Artist | undefined {
-  return ARTISTS.find((artist) => artist.id === id);
-}
