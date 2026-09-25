@@ -4,6 +4,8 @@ import "dotenv/config";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "../lib/generated/prisma/client";
 import { ARTISTS } from "../lib/data/artists";
+import { RELEASES } from "../lib/data/albums";
+import { CONCERTS } from "../lib/data/concerts";
 
 const prisma = new PrismaClient({
   adapter: new PrismaPg({ connectionString: process.env.DIRECT_URL }),
@@ -34,9 +36,83 @@ async function seedArtists() {
   }
 }
 
+async function seedReleases() {
+  for (const release of RELEASES) {
+    const artist = await prisma.artist.findUniqueOrThrow({
+      where: { slug: release.artistSlug },
+    });
+    const data = {
+      title: release.title,
+      type: release.type,
+      releaseDate: release.releaseDate ? new Date(release.releaseDate) : null,
+      coverUrl: release.coverUrl,
+      listenUrl: release.listenUrl ?? null,
+      artistId: artist.id,
+    };
+    const album = await prisma.album.upsert({
+      where: { slug: release.slug },
+      create: { slug: release.slug, ...data },
+      update: data,
+    });
+
+    for (const product of release.products ?? []) {
+      const productData = {
+        name: product.name,
+        description: product.description ?? null,
+        type: "ALBUM" as const,
+        priceCents: product.priceCents,
+        stock: product.stock,
+        imageUrl: product.imageUrl ?? release.coverUrl,
+        albumId: album.id,
+      };
+      // Le stock restant n'est initialisé qu'à la création, pour ne pas
+      // écraser les ventes déjà enregistrées.
+      await prisma.product.upsert({
+        where: { slug: product.slug },
+        create: {
+          slug: product.slug,
+          ...productData,
+          stockRestant: product.stock,
+        },
+        update: productData,
+      });
+    }
+    const count = release.products?.length ?? 0;
+    console.log(
+      `  ✓ ${release.title} (${release.type.toLowerCase()}${count ? `, ${count} produit(s)` : ""})`,
+    );
+  }
+}
+
+async function seedConcerts() {
+  for (const concert of CONCERTS) {
+    const artist = await prisma.artist.findUniqueOrThrow({
+      where: { slug: concert.artistSlug },
+    });
+    const data = {
+      title: concert.title ?? null,
+      venue: concert.venue,
+      city: concert.city,
+      date: new Date(concert.date),
+      ticketUrl: concert.ticketUrl ?? null,
+      artistId: artist.id,
+    };
+    await prisma.concert.upsert({
+      where: { slug: concert.slug },
+      create: { slug: concert.slug, ...data },
+      update: data,
+    });
+    console.log(`  ✓ ${concert.date} ${artist.name} — ${concert.venue}`);
+  }
+}
+
 async function main() {
   console.log("Artistes :");
   await seedArtists();
+  console.log("Sorties :");
+  await seedReleases();
+  console.log("Concerts :");
+  await seedConcerts();
 }
 
 main()

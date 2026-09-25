@@ -34,12 +34,19 @@ model Artist {
   @@map("artists")
 }
 
+enum AlbumType {
+  ALBUM
+  SINGLE
+}
+
 model Album {
   id          String    @id @default(cuid())
   slug        String    @unique
   title       String
-  releaseDate DateTime  @db.Date
+  releaseDate DateTime? @db.Date // facultative tant qu'elle n'est pas connue
   coverUrl    String?
+  type        AlbumType @default(ALBUM)
+  listenUrl   String? // écoute libre (Spotify…)
   artistId    String
   artist      Artist    @relation(fields: [artistId], references: [id], onDelete: Cascade)
   products    Product[]
@@ -52,9 +59,11 @@ model Album {
 
 model Concert {
   id        String   @id @default(cuid())
+  slug      String   @unique // identifiant stable (seed)
+  title     String? // nom de l'événement, ex. "Festival Jazz à la Cité"
   venue     String
   city      String
-  date      DateTime
+  date      DateTime @db.Date // jour du concert (heure non gérée)
   ticketUrl String?
   artistId  String
   artist    Artist   @relation(fields: [artistId], references: [id], onDelete: Cascade)
@@ -74,6 +83,7 @@ enum ProductType {
 
 model Product {
   id           String      @id @default(cuid())
+  slug         String      @unique // identifiant stable (seed, URL)
   name         String
   description  String?
   type         ProductType @default(ALBUM)

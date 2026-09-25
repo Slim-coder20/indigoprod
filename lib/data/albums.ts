@@ -1,68 +1,92 @@
-// Modélise la future table Postgres `product` (voir CLAUDE.md, étape 2).
-// Données statiques en attendant la connexion à la base de données.
-export type Album = {
-  id: string;
-  artistName: string;
-  albumTitle: string;
-  releaseDate: string; // ISO 8601
-  price: number; // en euros
+// Sorties utilisées par prisma/seed.ts pour remplir les tables `albums` et
+// `products`. Le site lit la base via lib/queries/releases.ts.
+export type ProductSeed = {
+  slug: string; // identifiant stable du produit
+  name: string;
+  description?: string;
+  priceCents: number;
   stock: number; // stock initial
-  stockRestant: number; // stock restant à vendre
+  imageUrl?: string; // sinon la pochette de l'album
 };
 
-export const ALBUMS: Album[] = [
+export type ReleaseSeed = {
+  slug: string;
+  artistSlug: string; // slug de l'artiste dans la table `artists`
+  title: string;
+  type: "ALBUM" | "SINGLE";
+  releaseDate?: string; // ISO 8601, facultative si inconnue
+  coverUrl: string; // chemin dans /public
+  listenUrl?: string; // écoute libre (Spotify…)
+  products?: ProductSeed[]; // éditions vendues en boutique
+};
+
+// Stocks provisoires (100), à remplacer par les stocks réels.
+export const RELEASES: ReleaseSeed[] = [
   {
-    id: "nova-ekwueme-horizons",
-    artistName: "Nova Ekwueme",
-    albumTitle: "Horizons",
-    releaseDate: "2025-03-14",
-    price: 19.9,
-    stock: 500,
-    stockRestant: 128,
+    slug: "slim-abida-the-beginnings",
+    artistSlug: "slim-abida",
+    title: "The Beginnings",
+    type: "SINGLE",
+    releaseDate: "2026-06-21",
+    coverUrl: "/albums/contrast.jpg",
+    listenUrl: "https://open.spotify.com/intl-fr/album/5rInmdhgFLs3lpmvFEu3r7",
   },
   {
-    id: "leo-solstice-embers",
-    artistName: "Léo Solstice",
-    albumTitle: "Embers",
-    releaseDate: "2024-11-02",
-    price: 17.5,
-    stock: 300,
-    stockRestant: 42,
+    slug: "da-silva-chansons-des-insomnies",
+    artistSlug: "da-silva",
+    title: "Chansons des Insomnies",
+    type: "ALBUM",
+    coverUrl: "/albums/da-silva-chansons-des-insomnies-vinyle.jpg",
+    products: [
+      {
+        slug: "da-silva-chansons-des-insomnies-vinyle",
+        name: "Vinyle Chansons des Insomnies + carte de téléchargement",
+        description:
+          "20 ans de carrière, 20 ans de L'Indécision… Un anniversaire à célébrer ! Mon 11e album : Chansons des Insomnies, suite logique de Grand Hôtel. Plus de 80 chansons écrites durant mes nuits d'insomnie. J'en ai sélectionné 10 pour ce disque.",
+        priceCents: 3500,
+        stock: 100,
+      },
+      {
+        slug: "da-silva-carnet-d-insomnie-livre-disque",
+        name: "Livre-disque Carnet d'Insomnie",
+        description:
+          "20 ans de carrière, 20 ans de L'Indécision… Un anniversaire à célébrer ! Carnet d'Insomnie, un livre-disque qui réunit mes dessins, poèmes, textes et mon 11e album, Chansons des Insomnies.",
+        priceCents: 4000,
+        stock: 100,
+        imageUrl: "/albums/da-silva-carnet-d-insomnie.jpg",
+      },
+    ],
   },
   {
-    id: "kali-mareva-marees",
-    artistName: "Kali Mareva",
-    albumTitle: "Marées",
-    releaseDate: "2025-06-20",
-    price: 21.0,
-    stock: 400,
-    stockRestant: 361,
+    slug: "slim-abida-asymetrie",
+    artistSlug: "slim-abida",
+    title: "Asymétrie",
+    type: "ALBUM",
+    releaseDate: "2022-05-27",
+    coverUrl: "/albums/asymetrie.jpg",
+    products: [
+      {
+        slug: "slim-abida-asymetrie",
+        name: "Asymétrie",
+        priceCents: 1500,
+        stock: 100,
+      },
+    ],
   },
   {
-    id: "les-eclipses-nuit-blanche",
-    artistName: "Les Éclipses",
-    albumTitle: "Nuit Blanche",
-    releaseDate: "2023-09-08",
-    price: 16.9,
-    stock: 250,
-    stockRestant: 0,
-  },
-  {
-    id: "mano-verlaine-lisiere",
-    artistName: "Mano Verlaine",
-    albumTitle: "Lisière",
-    releaseDate: "2025-01-17",
-    price: 18.9,
-    stock: 350,
-    stockRestant: 210,
-  },
-  {
-    id: "tsura-echoes",
-    artistName: "Tsura",
-    albumTitle: "Echoes",
-    releaseDate: "2024-05-30",
-    price: 20.5,
-    stock: 300,
-    stockRestant: 87,
+    slug: "slim-abida-frequences-basses",
+    artistSlug: "slim-abida",
+    title: "Fréquences Basses",
+    type: "ALBUM",
+    releaseDate: "2020-02-21",
+    coverUrl: "/albums/frequences-basses.jpg",
+    products: [
+      {
+        slug: "slim-abida-frequences-basses",
+        name: "Fréquences Basses",
+        priceCents: 1500,
+        stock: 100,
+      },
+    ],
   },
 ];

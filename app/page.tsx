@@ -1,17 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import Container from "@/components/Container";
-import AlbumCover from "@/components/AlbumCover";
 import ArtistCarousel from "@/components/ArtistCarousel";
 import { getArtists } from "@/lib/queries/artists";
-import { ALBUMS } from "@/lib/data/albums";
-import { CONCERTS } from "@/lib/data/concerts";
+import ReleaseCover from "@/components/ReleaseCover";
+import { formatPrice, getReleases } from "@/lib/queries/releases";
+import { formatConcertDate, getUpcomingConcerts } from "@/lib/queries/concerts";
 import logo from "@/public/logo-indigo.png";
 
 export default async function Home() {
   const artists = await getArtists();
-  const featuredAlbums = ALBUMS.slice(0, 3);
-  const nextConcerts = CONCERTS.slice(0, 3);
+  const latestReleases = (await getReleases()).slice(0, 3);
+  const nextConcerts = (await getUpcomingConcerts()).slice(0, 3);
 
   return (
     <>
@@ -89,19 +89,42 @@ export default async function Home() {
             </Link>
           </div>
           <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-3">
-            {featuredAlbums.map((album, index) => (
+            {latestReleases.map((release, index) => (
               <div
-                key={album.id}
+                key={release.id}
                 className="rounded-xl border border-line bg-surface p-6 transition-colors hover:border-line-strong"
               >
-                <AlbumCover index={index} />
-                <p className="mt-4 text-lg font-semibold text-foreground">
-                  {album.albumTitle}
-                </p>
-                <p className="text-sm text-muted">{album.artistName}</p>
-                <p className="mt-2 text-sm font-semibold text-highlight">
-                  {album.price.toFixed(2)} €
-                </p>
+                <ReleaseCover
+                  release={release}
+                  index={index}
+                  sizes="(min-width: 640px) 33vw, 100vw"
+                />
+                <div className="mt-4 flex items-center gap-2">
+                  <p className="text-lg font-semibold text-foreground">
+                    {release.title}
+                  </p>
+                  {release.type === "SINGLE" && (
+                    <span className="rounded-full bg-tag px-2.5 py-0.5 text-xs font-medium text-on-tag">
+                      Single
+                    </span>
+                  )}
+                </div>
+                <p className="text-sm text-muted">{release.artistName}</p>
+                {release.products.length > 0 ? (
+                  <p className="mt-2 text-sm font-semibold text-highlight">
+                    {release.products.length > 1 && "À partir de "}
+                    {formatPrice(release.products[0].priceCents)}
+                  </p>
+                ) : release.listenUrl ? (
+                  <a
+                    href={release.listenUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-2 inline-block text-sm font-semibold text-highlight transition-colors hover:text-foreground"
+                  >
+                    Écoute libre sur Spotify ↗
+                  </a>
+                ) : null}
               </div>
             ))}
           </div>
@@ -132,11 +155,14 @@ export default async function Home() {
                     {concert.artistName}
                   </p>
                   <p className="text-sm text-muted">
+                    {concert.title && concert.title !== concert.venue
+                      ? `${concert.title} · `
+                      : ""}
                     {concert.venue}, {concert.city}
                   </p>
                 </div>
                 <p className="font-mono text-sm font-medium text-highlight">
-                  {new Date(concert.date).toLocaleDateString("fr-FR", {
+                  {formatConcertDate(concert.date, {
                     day: "numeric",
                     month: "long",
                     year: "numeric",

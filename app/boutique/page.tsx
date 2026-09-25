@@ -1,8 +1,22 @@
 import Container from "@/components/Container";
-import AlbumCover from "@/components/AlbumCover";
-import { ALBUMS } from "@/lib/data/albums";
+import ReleaseCover from "@/components/ReleaseCover";
+import {
+  formatPrice,
+  formatReleaseDate,
+  getReleases,
+  spotifyEmbedUrl,
+} from "@/lib/queries/releases";
 
-export default function Boutique() {
+export default async function Boutique() {
+  const releases = await getReleases();
+  // Une carte par édition vendue (un album peut en avoir plusieurs).
+  const forSale = releases.flatMap((release) =>
+    release.products.map((product) => ({ release, product })),
+  );
+  const freeListening = releases.filter(
+    (release) => release.products.length === 0 && release.listenUrl,
+  );
+
   return (
     <Container className="py-20">
       <p className="text-sm font-medium uppercase tracking-widest text-highlight">
@@ -12,35 +26,44 @@ export default function Boutique() {
         Albums de nos artistes
       </h1>
       <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">
-        Le paiement en ligne (Stripe) sera activé prochainement — voir
-        CLAUDE.md pour la feuille de route.
+        Le paiement en ligne sera bientôt disponible.
       </p>
 
       <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {ALBUMS.map((album, index) => {
-          const epuise = album.stockRestant <= 0;
+        {forSale.map(({ release, product }, index) => {
+          const epuise = product.stockRestant <= 0;
           return (
             <div
-              key={album.id}
+              key={product.id}
               className="flex flex-col rounded-xl border border-line bg-surface p-6 transition-colors hover:border-line-strong"
             >
-              <AlbumCover index={index} />
+              <ReleaseCover
+                release={release}
+                src={product.imageUrl ?? release.coverUrl}
+                index={index}
+                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+              />
               <p className="mt-4 text-lg font-semibold text-foreground">
-                {album.albumTitle}
+                {product.name}
               </p>
-              <p className="text-sm text-muted">{album.artistName}</p>
-              <p className="mt-1 text-xs text-subtle">
-                Sorti le{" "}
-                {new Date(album.releaseDate).toLocaleDateString("fr-FR", {
-                  day: "numeric",
-                  month: "long",
-                  year: "numeric",
-                })}
+              <p className="text-sm text-muted">
+                {release.artistName}
+                {product.name !== release.title && ` · ${release.title}`}
               </p>
+              {release.releaseDate && (
+                <p className="mt-1 text-xs text-subtle">
+                  Sorti le {formatReleaseDate(release.releaseDate)}
+                </p>
+              )}
+              {product.description && (
+                <p className="mt-3 line-clamp-4 text-sm leading-6 text-muted">
+                  {product.description}
+                </p>
+              )}
 
-              <div className="mt-4 flex items-center justify-between">
+              <div className="mt-auto flex items-center justify-between pt-4">
                 <p className="text-lg font-semibold text-highlight">
-                  {album.price.toFixed(2)} €
+                  {formatPrice(product.priceCents)}
                 </p>
                 <p
                   className={`text-xs font-medium ${
@@ -49,9 +72,7 @@ export default function Boutique() {
                       : "text-subtle"
                   }`}
                 >
-                  {epuise
-                    ? "Épuisé"
-                    : `${album.stockRestant} en stock`}
+                  {epuise ? "Épuisé" : `${product.stockRestant} en stock`}
                 </p>
               </div>
 
@@ -66,6 +87,70 @@ export default function Boutique() {
           );
         })}
       </div>
+
+      {freeListening.length > 0 && (
+        <section className="mt-20">
+          <h2 className="text-2xl font-semibold text-foreground">
+            En écoute libre
+          </h2>
+          <p className="mt-2 text-muted">
+            Nos derniers singles, à écouter gratuitement.
+          </p>
+          <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
+            {freeListening.map((release, index) => {
+              const embed = spotifyEmbedUrl(release.listenUrl!);
+              return (
+                <div
+                  key={release.id}
+                  className="flex flex-col gap-6 rounded-xl border border-line bg-surface p-6 sm:flex-row"
+                >
+                  <div className="w-full shrink-0 sm:w-40">
+                    <ReleaseCover
+                      release={release}
+                      index={index}
+                      sizes="(min-width: 640px) 160px, 100vw"
+                    />
+                  </div>
+                  <div className="flex min-w-0 flex-1 flex-col">
+                    <div className="flex items-center gap-2">
+                      <p className="text-lg font-semibold text-foreground">
+                        {release.title}
+                      </p>
+                      <span className="rounded-full bg-tag px-2.5 py-0.5 text-xs font-medium text-on-tag">
+                        Single
+                      </span>
+                    </div>
+                    <p className="text-sm text-muted">{release.artistName}</p>
+                    {release.releaseDate && (
+                      <p className="mt-1 text-xs text-subtle">
+                        Sorti le {formatReleaseDate(release.releaseDate)}
+                      </p>
+                    )}
+                    {embed ? (
+                      <iframe
+                        src={embed}
+                        title={`${release.title} — ${release.artistName} sur Spotify`}
+                        loading="lazy"
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                        className="mt-4 h-[152px] w-full rounded-xl border-0"
+                      />
+                    ) : (
+                      <a
+                        href={release.listenUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-4 text-sm font-semibold text-highlight hover:text-foreground"
+                      >
+                        Écouter ↗
+                      </a>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      )}
     </Container>
   );
 }

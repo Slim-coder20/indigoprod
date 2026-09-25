@@ -1,38 +1,37 @@
-export type Concert = {
-  id: string;
-  artistName: string;
+// Concerts utilisés par prisma/seed.ts pour remplir la table `concerts`.
+// Le site lit la base via lib/queries/concerts.ts.
+export type ConcertSeed = {
+  slug: string;
+  artistSlug: string; // slug de l'artiste dans la table `artists`
+  title?: string; // nom de l'événement
   venue: string;
   city: string;
-  date: string; // ISO 8601
+  date: string; // AAAA-MM-JJ
+  ticketUrl?: string;
 };
 
-export const CONCERTS: Concert[] = [
+export const CONCERTS: ConcertSeed[] = [
   {
-    id: "nova-ekwueme-paris",
-    artistName: "Nova Ekwueme",
-    venue: "La Cigale",
+    slug: "slim-abida-2026-10-18-paris",
+    artistSlug: "slim-abida",
+    title: "Festival Jazz à la Cité",
+    venue: "Maison de la Tunisie",
     city: "Paris",
-    date: "2026-11-14",
+    date: "2026-10-18",
   },
   {
-    id: "kali-mareva-lyon",
-    artistName: "Kali Mareva",
-    venue: "Le Transbordeur",
-    city: "Lyon",
-    date: "2026-11-28",
+    slug: "slim-abida-2026-10-30-tun-jazz",
+    artistSlug: "slim-abida",
+    title: "Festival Tun Jazz",
+    venue: "Festival Tun Jazz",
+    city: "Tunis – Bizerte",
+    date: "2026-10-30",
   },
   {
-    id: "les-eclipses-bordeaux",
-    artistName: "Les Éclipses",
-    venue: "Rocher de Palmer",
-    city: "Bordeaux",
-    date: "2026-12-05",
-  },
-  {
-    id: "tsura-marseille",
-    artistName: "Tsura",
-    venue: "Le Cabaret Aléatoire",
-    city: "Marseille",
-    date: "2026-12-19",
+    slug: "slim-abida-2027-02-10-jass-club",
+    artistSlug: "slim-abida",
+    venue: "Jass Club",
+    city: "Paris",
+    date: "2027-02-10",
   },
 ];
