@@ -19,7 +19,7 @@ export default function Home() {
           </p>
           <h1 className="max-w-2xl text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
             Nous révélons des artistes, nous produisons des{" "}
-            <span className="text-accent">émotions</span>.
+            <span className="rounded-md bg-lime px-2">émotions</span>.
           </h1>
           <p className="max-w-xl text-lg leading-8 text-muted">
             IndigoProduction accompagne ses artistes de l&apos;enregistrement
@@ -61,13 +61,13 @@ export default function Home() {
                 key={artist.id}
                 className="rounded-xl border border-line bg-surface p-6"
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-mauve text-sm font-semibold text-ink">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-ink text-sm font-semibold text-lime">
                   {artist.initials}
                 </div>
                 <p className="mt-4 text-lg font-semibold text-foreground">
                   {artist.name}
                 </p>
-                <p className="mt-2 inline-block rounded-full bg-tag px-3 py-0.5 text-xs font-medium text-cream">
+                <p className="mt-2 inline-block rounded-full bg-tag px-3 py-0.5 text-xs font-medium text-on-tag">
                   {artist.genre}
                 </p>
               </div>
@@ -76,7 +76,7 @@ export default function Home() {
         </Container>
       </section>
 
-      <section className="border-t border-line bg-surface py-20">
+      <section className="border-y border-line bg-surface-strong py-20">
         <Container>
           <div className="flex items-end justify-between">
             <h2 className="text-2xl font-semibold text-foreground">
@@ -93,14 +93,14 @@ export default function Home() {
             {featuredAlbums.map((album, index) => (
               <div
                 key={album.id}
-                className="rounded-xl border border-line bg-background p-6 transition-colors hover:border-line-strong"
+                className="rounded-xl border border-line bg-surface p-6 transition-colors hover:border-line-strong"
               >
                 <AlbumCover index={index} />
                 <p className="mt-4 text-lg font-semibold text-foreground">
                   {album.albumTitle}
                 </p>
                 <p className="text-sm text-muted">{album.artistName}</p>
-                <p className="mt-2 text-sm font-semibold text-accent">
+                <p className="mt-2 text-sm font-semibold text-highlight">
                   {album.price.toFixed(2)} €
                 </p>
               </div>
@@ -136,7 +136,7 @@ export default function Home() {
                     {concert.venue}, {concert.city}
                   </p>
                 </div>
-                <p className="font-mono text-sm font-medium text-accent">
+                <p className="font-mono text-sm font-medium text-highlight">
                   {new Date(concert.date).toLocaleDateString("fr-FR", {
                     day: "numeric",
                     month: "long",
@@ -161,7 +161,7 @@ export default function Home() {
           </div>
           <Link
             href="/contact"
-            className="rounded-full bg-ink px-6 py-3 text-sm font-semibold text-lime transition-colors hover:bg-olive"
+            className="rounded-full bg-lime px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-mauve"
           >
             Nous contacter
           </Link>

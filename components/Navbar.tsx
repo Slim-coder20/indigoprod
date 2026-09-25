@@ -33,7 +33,7 @@ export default function Navbar() {
                 href={link.href}
                 className={`text-sm font-medium transition-colors hover:text-foreground ${
                   active
-                    ? "text-accent underline decoration-2 underline-offset-8"
+                    ? "text-foreground underline decoration-mauve decoration-[3px] underline-offset-8"
                     : "text-muted"
                 }`}
               >
@@ -90,7 +90,7 @@ export default function Navbar() {
                   onClick={() => setOpen(false)}
                   className={`rounded-md px-3 py-2 text-sm font-medium ${
                     active
-                      ? "bg-surface-strong text-accent"
+                      ? "bg-surface-strong text-foreground"
                       : "text-muted hover:bg-surface-strong hover:text-foreground"
                   }`}
                 >

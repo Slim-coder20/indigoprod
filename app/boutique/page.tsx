@@ -39,7 +39,7 @@ export default function Boutique() {
               </p>
 
               <div className="mt-4 flex items-center justify-between">
-                <p className="text-lg font-semibold text-accent">
+                <p className="text-lg font-semibold text-highlight">
                   {album.price.toFixed(2)} €
                 </p>
                 <p

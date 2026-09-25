@@ -29,7 +29,7 @@ export default function Concerts() {
               </p>
             </div>
             <div className="flex items-center gap-4">
-              <p className="font-mono text-sm font-medium text-accent">
+              <p className="font-mono text-sm font-medium text-highlight">
                 {new Date(concert.date).toLocaleDateString("fr-FR", {
                   weekday: "long",
                   day: "numeric",

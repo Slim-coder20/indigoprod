@@ -9,23 +9,27 @@
   --olive: #655e36;
   --lime: #eef16d;
 
-  /* Rôles utilisés dans l'UI */
-  --background: var(--ink);
-  --foreground: var(--cream);
-  --muted: color-mix(in oklab, var(--cream) 68%, transparent);
-  --subtle: color-mix(in oklab, var(--cream) 48%, transparent);
-  --surface: color-mix(in oklab, var(--cream) 5%, transparent);
-  --surface-strong: color-mix(in oklab, var(--cream) 9%, transparent);
-  --line: color-mix(in oklab, var(--cream) 11%, transparent);
-  --line-strong: color-mix(in oklab, var(--cream) 26%, transparent);
-  --accent: var(--lime);
-  --accent-hover: color-mix(in oklab, var(--lime) 85%, white);
-  --on-accent: var(--ink);
-  --highlight: var(--mauve);
-  --tag: var(--olive);
-  --band: var(--cream-dim);
-  --on-band: var(--ink);
-  --on-band-muted: var(--olive);
+  /* Rôles utilisés dans l'UI (thème clair sur fond cream-dim) */
+  --background: var(--cream-dim);
+  --foreground: var(--ink);
+  --muted: color-mix(in oklab, var(--ink) 72%, transparent);
+  --subtle: color-mix(in oklab, var(--ink) 55%, transparent);
+  --surface: color-mix(in oklab, var(--cream) 55%, white);
+  --surface-strong: color-mix(in oklab, var(--ink) 6%, transparent);
+  --line: color-mix(in oklab, var(--ink) 12%, transparent);
+  --line-strong: color-mix(in oklab, var(--ink) 30%, transparent);
+  /* Boutons principaux : fond ink, texte lime */
+  --accent: var(--ink);
+  --accent-hover: var(--olive);
+  --on-accent: var(--lime);
+  /* Texte d'accent (petits titres, prix, dates, liens) */
+  --highlight: var(--olive);
+  --tag: var(--mauve);
+  --on-tag: var(--ink);
+  /* Bandeaux sombres pour rythmer la page */
+  --band: var(--ink);
+  --on-band: var(--cream);
+  --on-band-muted: color-mix(in oklab, var(--cream) 68%, transparent);
 }
 
 @theme inline {
@@ -49,6 +53,7 @@
   --color-on-accent: var(--on-accent);
   --color-highlight: var(--highlight);
   --color-tag: var(--tag);
+  --color-on-tag: var(--on-tag);
   --color-band: var(--band);
   --color-on-band: var(--on-band);
   --color-on-band-muted: var(--on-band-muted);

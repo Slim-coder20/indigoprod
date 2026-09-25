@@ -2,7 +2,7 @@
 const VARIANTS = [
   { bg: "bg-mauve", disc: "bg-olive", position: "-right-6 -bottom-6" },
   { bg: "bg-olive", disc: "bg-mauve", position: "-left-6 -top-6" },
-  { bg: "bg-cream-dim", disc: "bg-ink", position: "-right-8 -top-8" },
+  { bg: "bg-ink", disc: "bg-mauve", position: "-right-8 -top-8" },
 ];
 
 export default function AlbumCover({ index }: { index: number }) {

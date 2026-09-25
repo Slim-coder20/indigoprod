@@ -20,13 +20,13 @@ export default function Artistes() {
             key={artist.id}
             className="rounded-xl border border-line bg-surface p-6"
           >
-            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-mauve text-base font-semibold text-ink">
+            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-ink text-base font-semibold text-lime">
               {artist.initials}
             </div>
             <p className="mt-4 text-lg font-semibold text-foreground">
               {artist.name}
             </p>
-            <p className="mt-2 inline-block rounded-full bg-tag px-3 py-0.5 text-xs font-medium text-cream">
+            <p className="mt-2 inline-block rounded-full bg-tag px-3 py-0.5 text-xs font-medium text-on-tag">
               {artist.genre}
             </p>
             <p className="mt-3 text-sm leading-6 text-muted">
