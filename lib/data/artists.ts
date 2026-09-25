@@ -1,5 +1,5 @@
 export type SocialLink = {
-  label: "Instagram" | "Facebook" | "YouTube" | "Spotify";
+  label: "Site web" | "Instagram" | "Facebook" | "YouTube" | "Spotify";
   url: string;
 };
 
@@ -45,6 +45,7 @@ export const ARTISTS: Artist[] = [
       title: "Father — solo de basse",
     },
     socials: [
+      { label: "Site web", url: "https://www.slimabida.fr/" },
       {
         label: "Instagram",
         url: "https://www.instagram.com/slimabidaproject/",
@@ -110,6 +111,7 @@ export const ARTISTS: Artist[] = [
     initials: "DJ",
     photo: "/artistes/django-jazz-quartet.webp",
     socials: [
+      { label: "Site web", url: "https://djangojazzquartet.com/" },
       {
         label: "Instagram",
         url: "https://www.instagram.com/djangojazzquartet/",
