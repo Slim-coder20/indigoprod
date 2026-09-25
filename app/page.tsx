@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Container from "@/components/Container";
+import AlbumCover from "@/components/AlbumCover";
 import { ARTISTS } from "@/lib/data/artists";
 import { ALBUMS } from "@/lib/data/albums";
 import { CONCERTS } from "@/lib/data/concerts";
@@ -11,28 +12,29 @@ export default function Home() {
 
   return (
     <>
-      <section className="border-b border-zinc-800 bg-gradient-to-b from-indigo-950/40 to-zinc-950">
+      <section className="border-b border-line bg-background">
         <Container className="flex flex-col items-start gap-6 py-24 sm:py-32">
-          <p className="text-sm font-medium uppercase tracking-widest text-indigo-400">
+          <p className="text-sm font-medium uppercase tracking-widest text-highlight">
             Maison de production musicale
           </p>
-          <h1 className="max-w-2xl text-4xl font-semibold tracking-tight text-zinc-50 sm:text-5xl">
-            Nous révélons des artistes, nous produisons des émotions.
+          <h1 className="max-w-2xl text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+            Nous révélons des artistes, nous produisons des{" "}
+            <span className="text-accent">émotions</span>.
           </h1>
-          <p className="max-w-xl text-lg leading-8 text-zinc-400">
+          <p className="max-w-xl text-lg leading-8 text-muted">
             IndigoProduction accompagne ses artistes de l&apos;enregistrement
             à la scène : albums, tournées et boutique en ligne.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row">
             <Link
               href="/artistes"
-              className="rounded-full bg-indigo-500 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-indigo-400"
+              className="rounded-full bg-accent px-6 py-3 text-sm font-semibold text-on-accent transition-colors hover:bg-accent-hover"
             >
               Découvrir nos artistes
             </Link>
             <Link
               href="/boutique"
-              className="rounded-full border border-zinc-700 px-6 py-3 text-sm font-semibold text-zinc-100 transition-colors hover:border-indigo-400 hover:text-indigo-400"
+              className="rounded-full border border-line-strong px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:border-accent hover:text-accent"
             >
               Voir la boutique
             </Link>
@@ -43,12 +45,12 @@ export default function Home() {
       <section className="py-20">
         <Container>
           <div className="flex items-end justify-between">
-            <h2 className="text-2xl font-semibold text-zinc-50">
+            <h2 className="text-2xl font-semibold text-foreground">
               Nos artistes
             </h2>
             <Link
               href="/artistes"
-              className="text-sm font-medium text-indigo-400 hover:text-indigo-300"
+              className="text-sm font-medium text-highlight transition-colors hover:text-accent"
             >
               Tous les artistes →
             </Link>
@@ -57,46 +59,48 @@ export default function Home() {
             {featuredArtists.map((artist) => (
               <div
                 key={artist.id}
-                className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-6"
+                className="rounded-xl border border-line bg-surface p-6"
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-indigo-500/20 text-sm font-semibold text-indigo-300">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-mauve text-sm font-semibold text-ink">
                   {artist.initials}
                 </div>
-                <p className="mt-4 text-lg font-semibold text-zinc-50">
+                <p className="mt-4 text-lg font-semibold text-foreground">
                   {artist.name}
                 </p>
-                <p className="text-sm text-indigo-400">{artist.genre}</p>
+                <p className="mt-2 inline-block rounded-full bg-tag px-3 py-0.5 text-xs font-medium text-cream">
+                  {artist.genre}
+                </p>
               </div>
             ))}
           </div>
         </Container>
       </section>
 
-      <section className="border-t border-zinc-800 bg-zinc-900/30 py-20">
+      <section className="border-t border-line bg-surface py-20">
         <Container>
           <div className="flex items-end justify-between">
-            <h2 className="text-2xl font-semibold text-zinc-50">
+            <h2 className="text-2xl font-semibold text-foreground">
               Dernières sorties
             </h2>
             <Link
               href="/boutique"
-              className="text-sm font-medium text-indigo-400 hover:text-indigo-300"
+              className="text-sm font-medium text-highlight transition-colors hover:text-accent"
             >
               Toute la boutique →
             </Link>
           </div>
           <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-3">
-            {featuredAlbums.map((album) => (
+            {featuredAlbums.map((album, index) => (
               <div
                 key={album.id}
-                className="rounded-xl border border-zinc-800 bg-zinc-950 p-6"
+                className="rounded-xl border border-line bg-background p-6 transition-colors hover:border-line-strong"
               >
-                <div className="aspect-square w-full rounded-lg bg-gradient-to-br from-indigo-500/30 to-zinc-800" />
-                <p className="mt-4 text-lg font-semibold text-zinc-50">
+                <AlbumCover index={index} />
+                <p className="mt-4 text-lg font-semibold text-foreground">
                   {album.albumTitle}
                 </p>
-                <p className="text-sm text-zinc-400">{album.artistName}</p>
-                <p className="mt-2 text-sm font-medium text-indigo-400">
+                <p className="text-sm text-muted">{album.artistName}</p>
+                <p className="mt-2 text-sm font-semibold text-accent">
                   {album.price.toFixed(2)} €
                 </p>
               </div>
@@ -108,31 +112,31 @@ export default function Home() {
       <section className="py-20">
         <Container>
           <div className="flex items-end justify-between">
-            <h2 className="text-2xl font-semibold text-zinc-50">
+            <h2 className="text-2xl font-semibold text-foreground">
               Prochains concerts
             </h2>
             <Link
               href="/concerts"
-              className="text-sm font-medium text-indigo-400 hover:text-indigo-300"
+              className="text-sm font-medium text-highlight transition-colors hover:text-accent"
             >
               Tous les concerts →
             </Link>
           </div>
-          <div className="mt-8 divide-y divide-zinc-800 rounded-xl border border-zinc-800">
+          <div className="mt-8 divide-y divide-line rounded-xl border border-line">
             {nextConcerts.map((concert) => (
               <div
                 key={concert.id}
                 className="flex flex-col justify-between gap-2 p-6 sm:flex-row sm:items-center"
               >
                 <div>
-                  <p className="text-lg font-semibold text-zinc-50">
+                  <p className="text-lg font-semibold text-foreground">
                     {concert.artistName}
                   </p>
-                  <p className="text-sm text-zinc-400">
+                  <p className="text-sm text-muted">
                     {concert.venue}, {concert.city}
                   </p>
                 </div>
-                <p className="text-sm font-medium text-indigo-400">
+                <p className="font-mono text-sm font-medium text-accent">
                   {new Date(concert.date).toLocaleDateString("fr-FR", {
                     day: "numeric",
                     month: "long",
@@ -145,19 +149,19 @@ export default function Home() {
         </Container>
       </section>
 
-      <section className="border-t border-zinc-800 bg-indigo-950/30 py-16">
+      <section className="bg-band py-16 text-on-band">
         <Container className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h2 className="text-2xl font-semibold text-zinc-50">
+            <h2 className="text-2xl font-semibold text-on-band">
               Une question, un projet ?
             </h2>
-            <p className="mt-2 text-zinc-400">
+            <p className="mt-2 text-on-band-muted">
               Contactez notre équipe, nous vous répondons rapidement.
             </p>
           </div>
           <Link
             href="/contact"
-            className="rounded-full bg-indigo-500 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-indigo-400"
+            className="rounded-full bg-ink px-6 py-3 text-sm font-semibold text-lime transition-colors hover:bg-olive"
           >
             Nous contacter
           </Link>

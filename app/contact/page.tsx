@@ -3,13 +3,13 @@ import Container from "@/components/Container";
 export default function Contact() {
   return (
     <Container className="py-20">
-      <p className="text-sm font-medium uppercase tracking-widest text-indigo-400">
+      <p className="text-sm font-medium uppercase tracking-widest text-highlight">
         Contact
       </p>
-      <h1 className="mt-3 max-w-2xl text-4xl font-semibold tracking-tight text-zinc-50">
+      <h1 className="mt-3 max-w-2xl text-4xl font-semibold tracking-tight text-foreground">
         Parlons de votre projet
       </h1>
-      <p className="mt-6 max-w-2xl text-lg leading-8 text-zinc-400">
+      <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">
         Une question sur un artiste, une demande de booking ou un partenariat
         ? Écrivez-nous.
       </p>
@@ -19,7 +19,7 @@ export default function Contact() {
           <div>
             <label
               htmlFor="name"
-              className="text-sm font-medium text-zinc-300"
+              className="text-sm font-medium text-foreground"
             >
               Nom
             </label>
@@ -27,14 +27,14 @@ export default function Contact() {
               id="name"
               name="name"
               type="text"
-              className="mt-2 w-full rounded-lg border border-zinc-800 bg-zinc-900/50 px-4 py-2.5 text-zinc-100 outline-none focus:border-indigo-400"
+              className="mt-2 w-full rounded-lg border border-line bg-surface px-4 py-2.5 text-foreground outline-none focus:border-accent"
               placeholder="Votre nom"
             />
           </div>
           <div>
             <label
               htmlFor="email"
-              className="text-sm font-medium text-zinc-300"
+              className="text-sm font-medium text-foreground"
             >
               Email
             </label>
@@ -42,14 +42,14 @@ export default function Contact() {
               id="email"
               name="email"
               type="email"
-              className="mt-2 w-full rounded-lg border border-zinc-800 bg-zinc-900/50 px-4 py-2.5 text-zinc-100 outline-none focus:border-indigo-400"
+              className="mt-2 w-full rounded-lg border border-line bg-surface px-4 py-2.5 text-foreground outline-none focus:border-accent"
               placeholder="vous@exemple.com"
             />
           </div>
           <div>
             <label
               htmlFor="message"
-              className="text-sm font-medium text-zinc-300"
+              className="text-sm font-medium text-foreground"
             >
               Message
             </label>
@@ -57,34 +57,34 @@ export default function Contact() {
               id="message"
               name="message"
               rows={5}
-              className="mt-2 w-full rounded-lg border border-zinc-800 bg-zinc-900/50 px-4 py-2.5 text-zinc-100 outline-none focus:border-indigo-400"
+              className="mt-2 w-full rounded-lg border border-line bg-surface px-4 py-2.5 text-foreground outline-none focus:border-accent"
               placeholder="Votre message"
             />
           </div>
           <button
             type="submit"
-            className="mt-2 w-fit rounded-full bg-indigo-500 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-indigo-400"
+            className="mt-2 w-fit rounded-full bg-accent px-6 py-3 text-sm font-semibold text-on-accent transition-colors hover:bg-accent-hover"
           >
             Envoyer le message
           </button>
         </form>
 
-        <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-8">
-          <p className="text-sm font-semibold text-zinc-200">
+        <div className="rounded-xl border border-line bg-surface p-8">
+          <p className="text-sm font-semibold text-foreground">
             Coordonnées
           </p>
           <dl className="mt-4 flex flex-col gap-3 text-sm">
             <div>
-              <dt className="text-zinc-500">Email</dt>
-              <dd className="text-zinc-300">contact@indigoproduction.fr</dd>
+              <dt className="text-subtle">Email</dt>
+              <dd className="text-foreground">contact@indigoproduction.fr</dd>
             </div>
             <div>
-              <dt className="text-zinc-500">Téléphone</dt>
-              <dd className="text-zinc-300">+33 1 23 45 67 89</dd>
+              <dt className="text-subtle">Téléphone</dt>
+              <dd className="text-foreground">+33 1 23 45 67 89</dd>
             </div>
             <div>
-              <dt className="text-zinc-500">Adresse</dt>
-              <dd className="text-zinc-300">
+              <dt className="text-subtle">Adresse</dt>
+              <dd className="text-foreground">
                 12 rue des Studios, 75011 Paris
               </dd>
             </div>

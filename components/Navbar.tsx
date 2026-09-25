@@ -11,14 +11,14 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-zinc-800 bg-zinc-950/80 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-line bg-background/80 backdrop-blur">
       <Container className="flex h-16 items-center justify-between">
         <Link
           href="/"
-          className="text-lg font-semibold tracking-tight text-zinc-50"
+          className="text-lg font-semibold tracking-tight text-foreground"
           onClick={() => setOpen(false)}
         >
-          Indigo<span className="text-indigo-400">Production</span>
+          Indigo<span className="text-highlight">Production</span>
         </Link>
 
         <nav className="hidden md:flex md:items-center md:gap-8">
@@ -31,8 +31,10 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-medium transition-colors hover:text-indigo-400 ${
-                  active ? "text-indigo-400" : "text-zinc-300"
+                className={`text-sm font-medium transition-colors hover:text-foreground ${
+                  active
+                    ? "text-accent underline decoration-2 underline-offset-8"
+                    : "text-muted"
                 }`}
               >
                 {link.label}
@@ -43,7 +45,7 @@ export default function Navbar() {
 
         <button
           type="button"
-          className="flex h-9 w-9 items-center justify-center rounded-md text-zinc-300 hover:bg-zinc-900 md:hidden"
+          className="flex h-9 w-9 items-center justify-center rounded-md text-foreground hover:bg-surface-strong md:hidden"
           aria-label="Ouvrir le menu"
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
@@ -74,7 +76,7 @@ export default function Navbar() {
       </Container>
 
       {open && (
-        <nav className="border-t border-zinc-800 bg-zinc-950 md:hidden">
+        <nav className="border-t border-line bg-background md:hidden">
           <Container className="flex flex-col gap-1 py-3">
             {NAV_LINKS.map((link) => {
               const active =
@@ -88,8 +90,8 @@ export default function Navbar() {
                   onClick={() => setOpen(false)}
                   className={`rounded-md px-3 py-2 text-sm font-medium ${
                     active
-                      ? "bg-zinc-900 text-indigo-400"
-                      : "text-zinc-300 hover:bg-zinc-900"
+                      ? "bg-surface-strong text-accent"
+                      : "text-muted hover:bg-surface-strong hover:text-foreground"
                   }`}
                 >
                   {link.label}
