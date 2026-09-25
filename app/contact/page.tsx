@@ -1,4 +1,5 @@
 import Container from "@/components/Container";
+import { CONTACT } from "@/lib/contact";
 
 export default function Contact() {
   return (
@@ -10,8 +11,8 @@ export default function Contact() {
         Parlons de votre projet
       </h1>
       <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">
-        Une question sur un artiste, une demande de booking ou un partenariat
-        ? Écrivez-nous.
+        Une question sur un artiste, une demande de booking ou un partenariat ?
+        Écrivez-nous.
       </p>
 
       <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-2">
@@ -70,23 +71,35 @@ export default function Contact() {
         </form>
 
         <div className="rounded-xl border border-line bg-surface p-8">
-          <p className="text-sm font-semibold text-foreground">
-            Coordonnées
-          </p>
+          <p className="text-sm font-semibold text-foreground">Coordonnées</p>
           <dl className="mt-4 flex flex-col gap-3 text-sm">
             <div>
               <dt className="text-subtle">Email</dt>
-              <dd className="text-foreground">contact@indigoproduction.fr</dd>
+              <dd>
+                <a
+                  href={`mailto:${CONTACT.email}`}
+                  className="text-foreground underline decoration-line-strong underline-offset-4 transition-colors hover:decoration-foreground"
+                >
+                  {CONTACT.email}
+                </a>
+              </dd>
             </div>
             <div>
               <dt className="text-subtle">Téléphone</dt>
-              <dd className="text-foreground">+33 1 23 45 67 89</dd>
+              {CONTACT.phones.map((phone) => (
+                <dd key={phone.href}>
+                  <a
+                    href={phone.href}
+                    className="text-foreground transition-colors hover:text-highlight"
+                  >
+                    {phone.label}
+                  </a>
+                </dd>
+              ))}
             </div>
             <div>
-              <dt className="text-subtle">Adresse</dt>
-              <dd className="text-foreground">
-                12 rue des Studios, 75011 Paris
-              </dd>
+              <dt className="text-subtle">Ville</dt>
+              <dd className="text-foreground">{CONTACT.city}</dd>
             </div>
           </dl>
         </div>

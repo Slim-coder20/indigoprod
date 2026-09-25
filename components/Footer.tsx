@@ -1,6 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
 import Container from "./Container";
 import { NAV_LINKS } from "@/lib/nav";
+import { CONTACT } from "@/lib/contact";
+import logo from "@/public/logo-indigo.png";
 
 export default function Footer() {
   return (
@@ -14,6 +17,7 @@ export default function Footer() {
             Maison de production musicale indépendante. Nous accompagnons nos
             artistes de l&apos;enregistrement à la scène.
           </p>
+          <Image src={logo} alt="Logo Indigo" className="mt-6 h-12 w-auto" />
         </div>
 
         <div>
@@ -45,10 +49,18 @@ export default function Footer() {
       </Container>
 
       <div className="border-t border-line">
-        <Container className="py-6">
-          <p className="text-xs text-subtle">
-            © {new Date().getFullYear()} IndigoProduction. Tous droits
-            réservés.
+        <Container className="flex flex-col gap-2 py-6 text-xs text-subtle sm:flex-row sm:items-center sm:justify-between">
+          <p>
+            © {new Date().getFullYear()} IndigoProduction. Tous droits réservés.
+          </p>
+          <p>
+            Licences d&apos;entrepreneur de spectacles :{" "}
+            {CONTACT.licences.map((licence, i) => (
+              <span key={licence}>
+                {i > 0 && " · "}
+                <span className="whitespace-nowrap font-mono">{licence}</span>
+              </span>
+            ))}
           </p>
         </Container>
       </div>
