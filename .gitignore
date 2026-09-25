@@ -43,3 +43,8 @@ next-env.d.ts
 
 #claude
 CLAUDE.md
+
+/lib/generated/prisma
+
+# Modèle des variables d'environnement (sans secrets)
+!.env.example

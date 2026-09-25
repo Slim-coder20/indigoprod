@@ -1,5 +1,7 @@
+import Image from "next/image";
 import Container from "@/components/Container";
 import { CONTACT } from "@/lib/contact";
+import logo from "@/public/logo-indigo.png";
 
 export default function Contact() {
   return (
@@ -102,6 +104,11 @@ export default function Contact() {
               <dd className="text-foreground">{CONTACT.city}</dd>
             </div>
           </dl>
+          <Image
+            src={logo}
+            alt="Logo Indigo"
+            className="mt-8 h-14 w-auto"
+          />
         </div>
       </div>
     </Container>

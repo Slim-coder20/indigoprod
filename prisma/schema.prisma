@@ -1,0 +1,12 @@
+// Schéma de la base Supabase "indigoProduction".
+// Tables prévues : Product, Order, Artist, Album, Concert.
+// Les champs de chaque table seront définis au fur et à mesure.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
