@@ -1,22 +1,21 @@
 import Container from "@/components/Container";
 
-const VALEURS = [
+const BRANCHES = [
   {
-    title: "Exigence artistique",
+    name: "Indigo Prod",
+    badge: null,
     description:
-      "Chaque projet est accompagné avec un souci constant de la qualité musicale et de l'identité de l'artiste.",
+      "Gestion et production de spectacles vivants (diffusion, administration, tournées).",
   },
   {
-    title: "Indépendance",
+    name: "Indigo Records",
+    badge: "Créé en 2026",
     description:
-      "IndigoProduction reste une structure indépendante, pour préserver la liberté créative de ses artistes.",
-  },
-  {
-    title: "Proximité",
-    description:
-      "Un accompagnement humain, de la composition en studio jusqu'à la scène.",
+      "Production phonographique et accompagnement des projets enregistrés jusqu'à leur sortie.",
   },
 ];
+
+const VALEURS = ["Écoute", "Dialogue", "Confiance"];
 
 export default function About() {
   return (
@@ -25,38 +24,51 @@ export default function About() {
         À propos
       </p>
       <h1 className="mt-3 max-w-2xl text-4xl font-semibold tracking-tight text-foreground">
-        Une maison de production à taille humaine
+        Qui sommes-nous ?
       </h1>
       <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">
-        Fondée par des passionnés de musique, IndigoProduction accompagne des
-        artistes émergents et confirmés dans la création, la production et la
-        diffusion de leurs œuvres. De l&apos;enregistrement en studio à la
-        tournée, nous mettons notre expertise au service de leur vision
-        artistique.
+        Indigo est une structure indépendante basée à Tours, fondée en 2024 par
+        Noria Bouha après des années d&apos;expérience dans le secteur musical. Née
+        d&apos;une collaboration fondatrice avec Da Silva, elle propose un
+        accompagnement artistique global, à taille humaine et sur-mesure.
       </p>
 
-      <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-3">
-        {VALEURS.map((valeur) => (
+      <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2">
+        {BRANCHES.map((branche) => (
           <div
-            key={valeur.title}
-            className="rounded-xl border border-line bg-surface p-6"
+            key={branche.name}
+            className="rounded-xl border border-line bg-surface p-8"
           >
-            <p className="text-lg font-semibold text-foreground">
-              {valeur.title}
-            </p>
-            <p className="mt-2 text-sm leading-6 text-muted">
-              {valeur.description}
-            </p>
+            <div className="flex flex-wrap items-center gap-3">
+              <h2 className="text-2xl font-semibold text-foreground">
+                {branche.name}
+              </h2>
+              {branche.badge && (
+                <span className="rounded-full bg-tag px-3 py-0.5 text-xs font-medium text-on-tag">
+                  {branche.badge}
+                </span>
+              )}
+            </div>
+            <p className="mt-3 leading-7 text-muted">{branche.description}</p>
           </div>
         ))}
       </div>
 
-      <div className="mt-16 rounded-xl border border-line bg-surface p-8">
-        <h2 className="text-2xl font-semibold text-foreground">Notre mission</h2>
-        <p className="mt-4 max-w-3xl text-muted leading-7">
-          Offrir à chaque artiste les moyens de développer un univers sonore
-          fort et cohérent, et le mettre en relation avec un public qui lui
-          ressemble — sur disque, en boutique, comme sur scène.
+      <div className="mt-16 rounded-xl bg-band p-8 text-on-band sm:p-10">
+        <div className="flex flex-wrap gap-2">
+          {VALEURS.map((valeur) => (
+            <span
+              key={valeur}
+              className="rounded-full bg-lime px-3 py-1 text-xs font-semibold text-ink"
+            >
+              {valeur}
+            </span>
+          ))}
+        </div>
+        <p className="mt-5 max-w-3xl text-xl leading-8">
+          Fondée sur l&apos;écoute, le dialogue et la confiance, chaque branche
+          partage une même vision : s&apos;adapter à la singularité de chaque
+          artiste.
         </p>
       </div>
     </Container>

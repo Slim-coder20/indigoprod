@@ -1,10 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import Container from "./Container";
 import { NAV_LINKS } from "@/lib/nav";
+import logo from "@/public/logo-indigo.png";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -15,10 +17,15 @@ export default function Navbar() {
       <Container className="flex h-16 items-center justify-between">
         <Link
           href="/"
-          className="text-lg font-semibold tracking-tight text-foreground"
+          className="flex items-center"
           onClick={() => setOpen(false)}
         >
-          Indigo<span className="text-highlight">Production</span>
+          <Image
+            src={logo}
+            alt="IndigoProduction — accueil"
+            loading="eager"
+            className="h-9 w-auto"
+          />
         </Link>
 
         <nav className="hidden md:flex md:items-center md:gap-8">
