@@ -1,12 +1,15 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import {
   sendContactMessage,
   type ContactFormState,
 } from "@/app/contact/actions";
 
 const initialState: ContactFormState = { status: "idle" };
+
+// Durée d'affichage du message de confirmation avant le retour au formulaire
+const SUCCESS_DISPLAY_MS = 3000;
 
 const inputClass =
   "mt-2 w-full rounded-lg border bg-surface px-4 py-2.5 text-foreground outline-none focus:border-accent";
@@ -17,7 +20,16 @@ export default function ContactForm() {
     initialState,
   );
 
-  if (state.status === "success") {
+  // Réponse de succès déjà affichée pendant SUCCESS_DISPLAY_MS
+  const [dismissed, setDismissed] = useState<ContactFormState | null>(null);
+
+  useEffect(() => {
+    if (state.status !== "success") return;
+    const timer = setTimeout(() => setDismissed(state), SUCCESS_DISPLAY_MS);
+    return () => clearTimeout(timer);
+  }, [state]);
+
+  if (state.status === "success" && dismissed !== state) {
     return (
       <div
         role="status"

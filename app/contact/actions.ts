@@ -39,7 +39,7 @@ export async function sendContactMessage(
       message: "Merci, votre message a bien été envoyé.",
     };
   }
-
+  // Validation des champs //
   const fieldErrors: ContactFormState["fieldErrors"] = {};
   if (values.name.length < 2) fieldErrors.name = "Indiquez votre nom.";
   else if (values.name.length > 100)
@@ -54,6 +54,7 @@ export async function sendContactMessage(
     return { status: "error", fieldErrors, values };
   }
 
+  // Envoi de l'email avec Resend //
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     console.error("[contact] RESEND_API_KEY manquante : message non envoyé.");
@@ -88,5 +89,6 @@ export async function sendContactMessage(
     status: "success",
     message:
       "Merci, votre message a bien été envoyé. Nous vous répondrons rapidement.",
+    
   };
 }
