@@ -53,18 +53,44 @@ Le type TypeScript correspondant (`Album`) est déjà défini dans
    Variables d'environnement (DB, clés Stripe), build de production.
 
    Checklist avant la mise en ligne :
-   - [ ] **Resend — vérifier le domaine** du site (resend.com > Domains >
+   - [x] **Resend — vérifier le domaine** du site (resend.com > Domains >
      Add Domain) et ajouter chez l'hébergeur DNS les enregistrements
      SPF/DKIM indiqués. Possible avant le déploiement : seul l'accès DNS
      est nécessaire.
-   - [ ] **Resend — `CONTACT_FROM_EMAIL`** : adresse du domaine vérifié,
+   - [x] **Resend — `CONTACT_FROM_EMAIL`** : adresse du domaine vérifié,
      ex. `"Site Indigo <contact@indigoprod.fr>"` (sinon
      `onboarding@resend.dev`, qui n'envoie qu'à l'email du compte Resend).
-   - [ ] **Resend — `CONTACT_TO_EMAIL`** : remettre
+   - [x] **Resend — `CONTACT_TO_EMAIL`** : remettre
      `"contact.indigoprod@gmail.com"` (en dev il pointe vers
      `slimdev20@gmail.com`, l'email du compte Resend).
-   - [ ] Reporter sur l'hébergeur toutes les variables de `.env.example`
+   - [x] Reporter sur l'hébergeur toutes les variables de `.env.example`
      (`DATABASE_URL`, `DIRECT_URL`, `RESEND_API_KEY`, `CONTACT_*`).
+   - [x] **Domaine — ajouter dans Vercel** `indigoprod.fr` et
+     `www.indigoprod.fr` (Settings > Domains).
+   - [x] **Domaine — obtenir l'accès IONOS** : `indigoprod.fr` est
+     enregistré chez IONOS (registrar + DNS `ui-dns`, expire le
+     24/04/2027), pas chez Squarespace. La cliente n'a pas les accès
+     (compte probablement ouvert par un tiers) : chercher les factures
+     IONOS / 1&1, contacter le créateur du site Squarespace, ou le
+     support IONOS en tant que titulaire (dernier recours : code de
+     transfert via l'AFNIC).
+   - [x] **Domaine — modifier les DNS chez IONOS** (valeurs exactes
+     affichées par Vercel) :
+     - A `@` : remplacer les IP Squarespace (198.49.23.145,
+       198.185.159.144, 198.185.159.145) par l'IP Vercel
+       `216.198.79.1` ;
+     - `www` : supprimer les 3 A Squarespace, puis CNAME vers
+       `175d5809126c49d5.vercel-dns-017.com` ;
+     - ne pas toucher aux MX IONOS (e-mails), aux TXT ni aux
+       nameservers. Les enregistrements SPF/DKIM Resend s'ajoutent
+       aussi chez IONOS.
+   - [x] **Domaine — vérifier** la propagation (`dig +short A
+     indigoprod.fr`, `dig +short CNAME www.indigoprod.fr`) et le
+     certificat HTTPS dans Vercel.
+   - [ ] **Squarespace — détacher le domaine** du site puis résilier
+     l'abonnement, une fois le nouveau site en ligne.
+   - [ ] **Domaine — transférer** au nom/compte de la cliente si le
+     compte IONOS appartient à un tiers (non urgent).
 
 ## Notes techniques
 
