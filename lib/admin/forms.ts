@@ -65,3 +65,16 @@ export const isoDate = (message: string) =>
     .regex(/^\d{4}-\d{2}-\d{2}$/, message)
     .transform((value) => new Date(`${value}T00:00:00Z`))
     .refine((date) => !Number.isNaN(date.getTime()), message);
+
+// Prix saisi en euros ("35", "35,5", "35,50") converti en centimes.
+export const euroPrice = z
+  .string()
+  .trim()
+  .regex(/^\d{1,5}([.,]\d{1,2})?$/, "Indiquez un prix, ex. 15 ou 19,90.")
+  .transform((value) => Math.round(Number(value.replace(",", ".")) * 100))
+  .refine((cents) => cents >= 50, "Le prix minimum est de 0,50 €.");
+
+// 1990 → "19,90" (valeur d'un champ prix)
+export function centsToEuroInput(cents: number): string {
+  return (cents / 100).toFixed(2).replace(".", ",");
+}
