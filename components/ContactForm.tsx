@@ -4,7 +4,7 @@ import { useActionState, useEffect, useState } from "react";
 import {
   sendContactMessage,
   type ContactFormState,
-} from "@/app/contact/actions";
+} from "@/app/(site)/contact/actions";
 
 const initialState: ContactFormState = { status: "idle" };
 
