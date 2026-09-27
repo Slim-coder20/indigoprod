@@ -49,6 +49,8 @@ export async function login(
 
 export async function logout() {
   const supabase = await createClient();
-  await supabase.auth.signOut();
+  // "local" : ne ferme que la session de cet appareil (par défaut, Supabase
+  // déconnecte le compte partout).
+  await supabase.auth.signOut({ scope: "local" });
   redirect("/admin/login");
 }
