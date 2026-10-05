@@ -1,3 +1,4 @@
+import AddToCartButton from "@/components/AddToCartButton";
 import Container from "@/components/Container";
 import ReleaseCover from "@/components/ReleaseCover";
 import {
@@ -76,13 +77,14 @@ export default async function Boutique() {
                 </p>
               </div>
 
-              <button
-                type="button"
-                disabled={epuise}
-                className="mt-4 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-on-accent transition-colors hover:bg-accent-hover disabled:cursor-not-allowed disabled:border disabled:border-line-strong disabled:bg-transparent disabled:text-subtle"
-              >
-                {epuise ? "Indisponible" : "Ajouter au panier"}
-              </button>
+              <AddToCartButton
+                productId={product.id}
+                name={product.name}
+                artistName={release.artistName}
+                priceCents={product.priceCents}
+                imageUrl={product.imageUrl ?? release.coverUrl}
+                stockRestant={product.stockRestant}
+              />
             </div>
           );
         })}

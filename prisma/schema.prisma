@@ -111,7 +111,7 @@ enum OrderStatus {
 
 model Order {
   id                    String      @id @default(cuid())
-  email                 String
+  email                 String?
   customerName          String?
   status                OrderStatus @default(PENDING)
   totalCents            Int

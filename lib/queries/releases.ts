@@ -1,6 +1,7 @@
 import "server-only";
 import { unstable_cache } from "next/cache";
 import { prisma } from "@/lib/prisma";
+import { formatPrice } from "@/lib/format";
 
 export type Release = {
   id: string; // slug
@@ -23,6 +24,7 @@ export type ReleaseProduct = {
   imageUrl?: string;
   priceCents: number;
   stockRestant: number;
+  formattedPrice: string;
 };
 
 // Toutes les sorties, de la plus récente à la plus ancienne (les dates
@@ -62,6 +64,7 @@ export const getReleases = unstable_cache(
         ...product,
         description: product.description ?? undefined,
         imageUrl: product.imageUrl ?? undefined,
+        formattedPrice: formatPrice(product.priceCents),
       })),
     }));
   },
@@ -79,13 +82,6 @@ export function spotifyEmbedUrl(url: string): string | undefined {
     : undefined;
 }
 
-export function formatPrice(cents: number): string {
-  return new Intl.NumberFormat("fr-FR", {
-    style: "currency",
-    currency: "EUR",
-  }).format(cents / 100);
-}
-
 export function formatReleaseDate(isoDate: string): string {
   return new Date(`${isoDate}T00:00:00Z`).toLocaleDateString("fr-FR", {
     day: "numeric",
@@ -94,3 +90,7 @@ export function formatReleaseDate(isoDate: string): string {
     timeZone: "UTC",
   });
 }
+
+// Ré-export : les pages qui importent déjà formatPrice d'ici continuent de marcher.
+export { formatPrice };
+

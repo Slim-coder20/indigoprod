@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import CartLink from "./CartLink";
 import Container from "./Container";
 import { NAV_LINKS } from "@/lib/nav";
 import logo from "@/public/logo-indigo.png";
@@ -50,36 +51,39 @@ export default function Navbar() {
           })}
         </nav>
 
-        <button
-          type="button"
-          className="flex h-9 w-9 items-center justify-center rounded-md text-foreground hover:bg-surface-strong md:hidden"
-          aria-label="Ouvrir le menu"
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={1.8}
-            className="h-6 w-6"
+        <div className="flex items-center gap-1">
+          <CartLink />
+          <button
+            type="button"
+            className="flex h-9 w-9 items-center justify-center rounded-md text-foreground hover:bg-surface-strong md:hidden"
+            aria-label="Ouvrir le menu"
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
           >
-            {open ? (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18 18 6M6 6l12 12"
-              />
-            ) : (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5"
-              />
-            )}
-          </svg>
-        </button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={1.8}
+              className="h-6 w-6"
+            >
+              {open ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18 18 6M6 6l12 12"
+                />
+              ) : (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5"
+                />
+              )}
+            </svg>
+          </button>
+        </div>
       </Container>
 
       {open && (
