@@ -124,6 +124,11 @@ export default async function AdminShopPage({
                         <span className="font-medium text-foreground">
                           {formatPrice(product.priceCents)}
                         </span>
+                        <span className="text-muted">
+                          {product.shippingCents > 0
+                            ? `port ${formatPrice(product.shippingCents)}`
+                            : "port offert"}
+                        </span>
                         <span
                           className={
                             product.stockRestant <= 0

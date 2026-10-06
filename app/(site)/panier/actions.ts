@@ -61,13 +61,17 @@ export async function createCheckoutSession(
   }
 
   // 3. Créer la commande PENDING (prix figés à cet instant)
-  const totalCents = products.reduce(
+  const itemsCents = products.reduce(
     (sum, p) => sum + p.priceCents * quantities.get(p.id)!,
     0,
   );
+  // Un seul colis par commande : on facture les frais de port les plus élevés
+  // parmi les produits du panier (fixés par produit dans l'admin).
+  const shippingCents = Math.max(...products.map((p) => p.shippingCents));
   const order = await prisma.order.create({
     data: {
-      totalCents,
+      totalCents: itemsCents + shippingCents,
+      shippingCents,
       items: {
         create: products.map((p) => ({
           productId: p.id,
@@ -91,6 +95,18 @@ export async function createCheckoutSession(
           product_data: { name: p.name },
         },
       })),
+      // Adresse de livraison saisie sur la page Stripe, récupérée par le
+      // webhook. Pays desservis : à élargir au besoin.
+      shipping_address_collection: { allowed_countries: ["FR"] },
+      shipping_options: [
+        {
+          shipping_rate_data: {
+            type: "fixed_amount",
+            display_name: shippingCents > 0 ? "Livraison" : "Livraison offerte",
+            fixed_amount: { amount: shippingCents, currency: "eur" },
+          },
+        },
+      ],
       client_reference_id: order.id,
       metadata: { orderId: order.id }, // le webhook retrouvera la commande
       success_url: `${siteUrl}/boutique/succes?session_id={CHECKOUT_SESSION_ID}`,

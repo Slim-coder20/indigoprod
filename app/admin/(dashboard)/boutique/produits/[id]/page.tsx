@@ -37,6 +37,7 @@ export default async function EditProductPage({
           name: product.name,
           description: product.description ?? "",
           price: centsToEuroInput(product.priceCents),
+          shipping: centsToEuroInput(product.shippingCents),
           quantity,
           initialQuantity: quantity,
           imageUrl: product.imageUrl ?? "",

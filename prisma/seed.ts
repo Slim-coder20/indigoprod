@@ -61,6 +61,7 @@ async function seedReleases() {
         description: product.description ?? null,
         type: "ALBUM" as const,
         priceCents: product.priceCents,
+        shippingCents: product.shippingCents ?? 0,
         stock: product.stock,
         imageUrl: product.imageUrl ?? release.coverUrl,
         albumId: album.id,

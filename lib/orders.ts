@@ -23,6 +23,9 @@ export async function fulfillOrder(session: Stripe.Checkout.Session) {
       ? session.payment_intent
       : (session.payment_intent?.id ?? null);
 
+  // Adresse saisie par le client sur la page Stripe Checkout.
+  const shipping = session.collected_information?.shipping_details;
+
   const processed = await prisma.$transaction(async (tx) => {
     // « Revendiquer » la commande : l'update ne réussit que si elle est
     // encore PENDING. À la 2e livraison du même événement, count vaut 0.
@@ -33,6 +36,12 @@ export async function fulfillOrder(session: Stripe.Checkout.Session) {
         email: session.customer_details?.email ?? null,
         customerName: session.customer_details?.name ?? null,
         stripePaymentIntentId: paymentIntentId,
+        shippingName: shipping?.name ?? null,
+        shippingLine1: shipping?.address.line1 ?? null,
+        shippingLine2: shipping?.address.line2 ?? null,
+        shippingPostalCode: shipping?.address.postal_code ?? null,
+        shippingCity: shipping?.address.city ?? null,
+        shippingCountry: shipping?.address.country ?? null,
       },
     });
     if (claimed.count === 0) return false;

@@ -74,6 +74,13 @@ export const euroPrice = z
   .transform((value) => Math.round(Number(value.replace(",", ".")) * 100))
   .refine((cents) => cents >= 50, "Le prix minimum est de 0,50 €.");
 
+// Montant en euros pouvant être nul (ex. frais de port), converti en centimes.
+export const euroAmount = z
+  .string()
+  .trim()
+  .regex(/^\d{1,5}([.,]\d{1,2})?$/, "Indiquez un montant, ex. 0, 4 ou 4,50.")
+  .transform((value) => Math.round(Number(value.replace(",", ".")) * 100));
+
 // 1990 → "19,90" (valeur d'un champ prix)
 export function centsToEuroInput(cents: number): string {
   return (cents / 100).toFixed(2).replace(".", ",");

@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/admin/auth";
 import {
+  euroAmount,
   euroPrice,
   fieldErrorsOf,
   formValues,
@@ -21,6 +22,7 @@ const FIELDS = [
   "name",
   "description",
   "price",
+  "shipping",
   "quantity",
   "initialQuantity",
   "imageUrl",
@@ -41,6 +43,7 @@ const productSchema = z.object({
   name: requiredText("Indiquez le nom du produit.", 150),
   description: optionalText(2000),
   price: euroPrice,
+  shipping: euroAmount,
   quantity,
   // Quantité affichée au chargement du formulaire (voir updateProduct)
   initialQuantity: z.string(),
@@ -88,8 +91,16 @@ export async function createProduct(
   await requireAdmin();
   const parsed = await parseProduct(formData);
   if (!parsed.ok) return parsed.state;
-  const { albumId, name, description, price, quantity, imageUrl, active } =
-    parsed.data;
+  const {
+    albumId,
+    name,
+    description,
+    price,
+    shipping,
+    quantity,
+    imageUrl,
+    active,
+  } = parsed.data;
 
   const slug = await uniqueSlug(slugify(name), async (candidate) =>
     Boolean(await prisma.product.findUnique({ where: { slug: candidate } })),
@@ -102,6 +113,7 @@ export async function createProduct(
       name,
       description,
       priceCents: price,
+      shippingCents: shipping,
       stock: quantity,
       stockRestant: quantity,
       imageUrl,
@@ -120,8 +132,16 @@ export async function updateProduct(
   await requireAdmin();
   const parsed = await parseProduct(formData);
   if (!parsed.ok) return parsed.state;
-  const { albumId, name, description, price, quantity, imageUrl, active } =
-    parsed.data;
+  const {
+    albumId,
+    name,
+    description,
+    price,
+    shipping,
+    quantity,
+    imageUrl,
+    active,
+  } = parsed.data;
 
   // On applique l'écart saisi (et non la valeur brute) : une vente passée
   // pendant que le formulaire était ouvert n'est pas effacée.
@@ -136,6 +156,7 @@ export async function updateProduct(
       name,
       description,
       priceCents: price,
+      shippingCents: shipping,
       imageUrl,
       active,
       stock: { increment: delta },

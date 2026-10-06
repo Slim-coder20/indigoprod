@@ -15,6 +15,7 @@ export default async function AdminDashboardPage() {
     upcomingCount,
     upcomingConcerts,
     activeProductCount,
+    paidOrderCount,
     lowStock,
   ] = await Promise.all([
     prisma.artist.count(),
@@ -26,6 +27,7 @@ export default async function AdminDashboardPage() {
       include: { artist: { select: { name: true } } },
     }),
     prisma.product.count({ where: { active: true } }),
+    prisma.order.count({ where: { status: "PAID" } }),
     prisma.product.findMany({
       where: { active: true, stockRestant: { lte: LOW_STOCK } },
       orderBy: { stockRestant: "asc" },
@@ -37,6 +39,7 @@ export default async function AdminDashboardPage() {
     { label: "Artistes", value: artistCount },
     { label: "Concerts à venir", value: upcomingCount },
     { label: "Produits en vente", value: activeProductCount },
+    { label: "Commandes payées", value: paidOrderCount },
   ];
 
   return (
@@ -45,7 +48,7 @@ export default async function AdminDashboardPage() {
         Tableau de bord
       </h1>
 
-      <section className="grid gap-4 sm:grid-cols-3">
+      <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat) => (
           <div
             key={stat.label}

@@ -82,21 +82,22 @@ enum ProductType {
 }
 
 model Product {
-  id           String      @id @default(cuid())
-  slug         String      @unique // identifiant stable (seed, URL)
-  name         String
-  description  String?
-  type         ProductType @default(ALBUM)
-  priceCents   Int // prix en centimes, comme Stripe (19,90 € = 1990)
-  stock        Int // stock initial
-  stockRestant Int // stock restant disponible à la vente
-  imageUrl     String?
-  active       Boolean     @default(true)
-  albumId      String? // renseigné quand le produit est un album
-  album        Album?      @relation(fields: [albumId], references: [id], onDelete: SetNull)
-  orderItems   OrderItem[]
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
+  id            String      @id @default(cuid())
+  slug          String      @unique // identifiant stable (seed, URL)
+  name          String
+  description   String?
+  type          ProductType @default(ALBUM)
+  priceCents    Int // prix en centimes, comme Stripe (19,90 € = 1990)
+  shippingCents Int         @default(0) // frais de port en centimes (0 = offerts)
+  stock         Int // stock initial
+  stockRestant  Int // stock restant disponible à la vente
+  imageUrl      String?
+  active        Boolean     @default(true)
+  albumId       String? // renseigné quand le produit est un album
+  album         Album?      @relation(fields: [albumId], references: [id], onDelete: SetNull)
+  orderItems    OrderItem[]
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
 
   @@index([albumId])
   @@map("products")
@@ -114,8 +115,16 @@ model Order {
   email                 String?
   customerName          String?
   status                OrderStatus @default(PENDING)
-  totalCents            Int
+  totalCents            Int // articles + frais de port
+  shippingCents         Int         @default(0) // part des frais de port dans le total
   currency              String      @default("eur")
+  // Adresse de livraison saisie sur la page Stripe (remplie par le webhook)
+  shippingName          String?
+  shippingLine1         String?
+  shippingLine2         String?
+  shippingPostalCode    String?
+  shippingCity          String?
+  shippingCountry       String? // code pays ISO, ex. "FR"
   stripeSessionId       String?     @unique
   stripePaymentIntentId String?     @unique
   items                 OrderItem[]

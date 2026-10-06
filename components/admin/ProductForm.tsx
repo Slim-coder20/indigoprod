@@ -21,7 +21,7 @@ export type ProductFormValues = Partial<Record<ProductField, string>>;
 export default function ProductForm({
   action,
   releases,
-  defaultValues = { quantity: "0", active: "on" },
+  defaultValues = { shipping: "0", quantity: "0", active: "on" },
   submitLabel,
 }: {
   action: (
@@ -93,6 +93,19 @@ export default function ProductForm({
             inputMode="decimal"
             placeholder="15,00"
             {...input("price")}
+          />
+        </Field>
+        <Field
+          label="Frais de port (€)"
+          id="shipping"
+          error={errors.shipping}
+          hint="0 : livraison offerte. Un seul tarif par commande : le plus élevé du panier."
+        >
+          <input
+            type="text"
+            inputMode="decimal"
+            placeholder="4,00"
+            {...input("shipping")}
           />
         </Field>
         <Field

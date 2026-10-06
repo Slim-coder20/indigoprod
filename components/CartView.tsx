@@ -132,8 +132,8 @@ export default function CartView() {
             <span className="font-semibold">{formatPrice(totalCents)}</span>
           </p>
           <p className="text-xs text-subtle">
-            {count} article{count > 1 ? "s" : ""} · le prix final est confirmé
-            au paiement
+            {count} article{count > 1 ? "s" : ""} · frais de port en sus,
+            ajoutés au paiement
           </p>
         </div>
         <button

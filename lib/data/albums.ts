@@ -5,6 +5,7 @@ export type ProductSeed = {
   name: string;
   description?: string;
   priceCents: number;
+  shippingCents?: number; // frais de port en centimes (0 ou absent = offerts)
   stock: number; // stock initial
   imageUrl?: string; // sinon la pochette de l'album
 };
@@ -44,6 +45,7 @@ export const RELEASES: ReleaseSeed[] = [
         description:
           "20 ans de carrière, 20 ans de L'Indécision… Un anniversaire à célébrer ! Mon 11e album : Chansons des Insomnies, suite logique de Grand Hôtel. Plus de 80 chansons écrites durant mes nuits d'insomnie. J'en ai sélectionné 10 pour ce disque.",
         priceCents: 3500,
+        shippingCents: 800,
         stock: 100,
       },
       {
@@ -52,6 +54,7 @@ export const RELEASES: ReleaseSeed[] = [
         description:
           "20 ans de carrière, 20 ans de L'Indécision… Un anniversaire à célébrer ! Carnet d'Insomnie, un livre-disque qui réunit mes dessins, poèmes, textes et mon 11e album, Chansons des Insomnies.",
         priceCents: 4000,
+        shippingCents: 800,
         stock: 100,
         imageUrl: "/albums/da-silva-carnet-d-insomnie.jpg",
       },
@@ -69,6 +72,7 @@ export const RELEASES: ReleaseSeed[] = [
         slug: "slim-abida-asymetrie",
         name: "Asymétrie",
         priceCents: 1500,
+        shippingCents: 400,
         stock: 100,
       },
     ],
@@ -85,6 +89,7 @@ export const RELEASES: ReleaseSeed[] = [
         slug: "slim-abida-frequences-basses",
         name: "Fréquences Basses",
         priceCents: 1500,
+        shippingCents: 400,
         stock: 100,
       },
     ],

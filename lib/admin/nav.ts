@@ -5,4 +5,5 @@ export const ADMIN_NAV = [
   { href: "/admin/artistes", label: "Artistes" },
   { href: "/admin/concerts", label: "Concerts" },
   { href: "/admin/boutique", label: "Boutique" },
+  { href: "/admin/commandes", label: "Commandes" },
 ];
