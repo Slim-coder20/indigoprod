@@ -3,6 +3,7 @@ import Link from "next/link";
 import Container from "./Container";
 import { NAV_LINKS } from "@/lib/nav";
 import { CONTACT } from "@/lib/contact";
+import { LEGAL_LINKS } from "@/lib/legal";
 import logo from "@/public/logo-indigo.png";
 
 export default function Footer() {
@@ -57,9 +58,27 @@ export default function Footer() {
 
       <div className="border-t border-line">
         <Container className="flex flex-col gap-2 py-6 text-xs text-subtle sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            © {new Date().getFullYear()} IndigoProduction. Tous droits réservés.
-          </p>
+          <div className="flex flex-col gap-2">
+            <p>Développé par <a href="https://www.slim-abida.dev" target="_blank" rel="noopener noreferrer">Slim Abida</a> pour Indigo Production</p>
+            <p>
+              © {new Date().getFullYear()} IndigoProduction. Tous droits
+              réservés.
+            </p>
+            <nav aria-label="Informations légales">
+              <ul className="flex flex-wrap gap-x-4 gap-y-1">
+                {LEGAL_LINKS.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="transition-colors hover:text-foreground"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
           <p>
             Licences d&apos;entrepreneur de spectacles :{" "}
             {CONTACT.licences.map((licence, i) => (
