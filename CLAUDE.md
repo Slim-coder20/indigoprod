@@ -87,9 +87,9 @@ Le type TypeScript correspondant (`Album`) est déjà défini dans
    - [x] **Domaine — vérifier** la propagation (`dig +short A
      indigoprod.fr`, `dig +short CNAME www.indigoprod.fr`) et le
      certificat HTTPS dans Vercel.
-   - [ ] **Squarespace — détacher le domaine** du site puis résilier
+   - [x] **Squarespace — détacher le domaine** du site puis résilier
      l'abonnement, une fois le nouveau site en ligne.
-   - [ ] **Domaine — transférer** au nom/compte de la cliente si le
+   - [x] **Domaine — transférer** au nom/compte de la cliente si le
      compte IONOS appartient à un tiers (non urgent).
 
 ## Notes techniques
