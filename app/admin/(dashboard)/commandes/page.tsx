@@ -68,7 +68,7 @@ export default async function AdminOrdersPage({
 
   return (
     <div className="flex max-w-4xl flex-col gap-8">
-      <h1 className="text-2xl font-semibold text-foreground">Commandes</h1>
+      <h1 className="text-2xl font-bold text-foreground">Commandes</h1>
 
       <nav className="flex flex-wrap gap-2" aria-label="Filtrer les commandes">
         {FILTERS.map((f) => (

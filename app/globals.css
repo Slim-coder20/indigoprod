@@ -1,45 +1,46 @@
 @import "tailwindcss";
 
 :root {
-  /* Palette IndigoProduction */
-  --ink: #2b2c29;
-  --cream: #e7e4d8;
-  --cream-dim: #ddddce;
-  --mauve: #deaad2;
-  --mauve-dark: #873463;
-  --olive: #655e36;
-  --lime: #eef16d;
+  /* Palette IndigoProduction : blanc + violet du logo (#503860) */
+  --ink: #241b2f;
+  --violet: #503860;
+  --violet-dark: #34243f;
+  --violet-bright: #7a4fa3;
+  --lilac: #b79bd3;
+  --lavender: #e9e0f3;
+  --lavender-soft: #f6f2fa;
 
-  /* Rôles utilisés dans l'UI (thème clair sur fond cream-dim) */
-  --background: var(--cream-dim);
+  /* Rôles utilisés dans l'UI (thème clair sur fond blanc) */
+  --background: #ffffff;
   --foreground: var(--ink);
-  --muted: color-mix(in oklab, var(--ink) 72%, transparent);
-  --subtle: color-mix(in oklab, var(--ink) 55%, transparent);
-  --surface: color-mix(in oklab, var(--cream) 55%, white);
-  --surface-strong: color-mix(in oklab, var(--ink) 6%, transparent);
-  --line: color-mix(in oklab, var(--ink) 12%, transparent);
-  --line-strong: color-mix(in oklab, var(--ink) 30%, transparent);
-  /* Boutons principaux : fond ink, texte lime */
-  --accent: var(--ink);
-  --accent-hover: var(--olive);
-  --on-accent: var(--lime);
+  --muted: color-mix(in oklab, var(--ink) 74%, white);
+  --subtle: color-mix(in oklab, var(--ink) 55%, white);
+  --surface: var(--lavender-soft);
+  --surface-strong: color-mix(in oklab, var(--lavender) 55%, white);
+  --line: color-mix(in oklab, var(--violet) 14%, white);
+  --line-strong: color-mix(in oklab, var(--violet) 35%, white);
+  /* Boutons principaux : fond violet du logo, texte blanc */
+  --accent: var(--violet);
+  --accent-hover: var(--violet-dark);
+  --on-accent: #ffffff;
   /* Texte d'accent (petits titres, prix, dates, liens) */
-  --highlight: var(--olive);
-  --tag: var(--mauve);
-  --on-tag: var(--ink);
+  --highlight: var(--violet);
+  --tag: var(--lavender);
+  --on-tag: var(--violet);
   /* Bandeaux sombres pour rythmer la page */
-  --band: var(--ink);
-  --on-band: var(--cream);
-  --on-band-muted: color-mix(in oklab, var(--cream) 68%, transparent);
+  --band: var(--violet);
+  --on-band: #ffffff;
+  --on-band-muted: color-mix(in oklab, white 78%, transparent);
 }
 
 @theme inline {
   --color-ink: var(--ink);
-  --color-cream: var(--cream);
-  --color-cream-dim: var(--cream-dim);
-  --color-mauve: var(--mauve);
-  --color-olive: var(--olive);
-  --color-lime: var(--lime);
+  --color-violet: var(--violet);
+  --color-violet-dark: var(--violet-dark);
+  --color-violet-bright: var(--violet-bright);
+  --color-lilac: var(--lilac);
+  --color-lavender: var(--lavender);
+  --color-lavender-soft: var(--lavender-soft);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -63,6 +64,16 @@
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-roboto);
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-heading), var(--font-geist-sans), sans-serif;
+  }
 }
 
 body {
@@ -71,8 +82,8 @@ body {
 }
 
 ::selection {
-  background: var(--lime);
-  color: var(--ink);
+  background: var(--lavender);
+  color: var(--violet-dark);
 }
 
 @keyframes marquee {

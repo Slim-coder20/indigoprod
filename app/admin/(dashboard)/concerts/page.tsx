@@ -34,10 +34,10 @@ export default async function AdminConcertsPage({
   return (
     <div className="flex max-w-4xl flex-col gap-8">
       <div className="flex flex-wrap items-center justify-between gap-4">
-        <h1 className="text-2xl font-semibold text-foreground">Concerts</h1>
+        <h1 className="text-2xl font-bold text-foreground">Concerts</h1>
         <Link
           href="/admin/concerts/nouveau"
-          className="rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-on-accent transition-colors hover:bg-accent-hover"
+          className="rounded-full bg-accent shadow-md shadow-violet/25 px-5 py-2.5 text-sm font-semibold text-on-accent transition-colors hover:bg-accent-hover"
         >
           + Ajouter un concert
         </Link>

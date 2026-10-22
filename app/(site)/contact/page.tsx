@@ -7,11 +7,11 @@ import logo from "@/public/logo-indigo.png";
 export default function Contact() {
   return (
     <Container className="py-20">
-      <p className="text-sm font-medium uppercase tracking-widest text-highlight">
+      <p className="w-fit rounded-full bg-lavender px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-violet">
         Contact
       </p>
-      <h1 className="mt-3 max-w-2xl text-4xl font-semibold tracking-tight text-foreground">
-        Parlons de votre projet
+      <h1 className="mt-3 max-w-2xl text-4xl font-bold tracking-tight text-foreground">
+        Parlons de votre <span className="text-violet-bright">projet</span>
       </h1>
       <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">
         Une question sur un artiste, une demande de booking ou un partenariat ?
@@ -21,7 +21,7 @@ export default function Contact() {
       <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-2">
         <ContactForm />
 
-        <div className="rounded-xl border border-line bg-surface p-8">
+        <div className="rounded-2xl border border-line bg-surface p-8 shadow-sm shadow-violet/5">
           <p className="text-sm font-semibold text-foreground">Coordonnées</p>
           <dl className="mt-4 flex flex-col gap-3 text-sm">
             <div>
@@ -29,7 +29,7 @@ export default function Contact() {
               <dd>
                 <a
                   href={`mailto:${CONTACT.email}`}
-                  className="text-foreground underline decoration-line-strong underline-offset-4 transition-colors hover:decoration-foreground"
+                  className="text-foreground underline decoration-line-strong underline-offset-4 transition-colors hover:decoration-violet"
                 >
                   {CONTACT.email}
                 </a>

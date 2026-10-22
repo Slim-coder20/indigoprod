@@ -25,7 +25,7 @@ export default async function EditProductPage({
 
   return (
     <div className="flex flex-col gap-8">
-      <h1 className="text-2xl font-semibold text-foreground">
+      <h1 className="text-2xl font-bold text-foreground">
         {product.name}
       </h1>
       <ProductForm

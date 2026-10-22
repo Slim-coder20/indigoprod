@@ -22,7 +22,7 @@ export default async function EditConcertPage({
 
   return (
     <div className="flex flex-col gap-8">
-      <h1 className="text-2xl font-semibold text-foreground">
+      <h1 className="text-2xl font-bold text-foreground">
         Modifier le concert
       </h1>
       <ConcertForm

@@ -24,7 +24,7 @@ export default function About() {
         À propos
       </p>
       <h1 className="mt-3 max-w-2xl text-4xl font-semibold tracking-tight text-foreground">
-        Qui <span className="text-[var(--mauve-dark)]">sommes-nous</span> ?
+        Qui <span className="text-violet-bright">sommes-nous</span> ?
       </h1>
       <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">
         Indigo est une structure indépendante basée à Tours, fondée en 2024 par
@@ -59,7 +59,7 @@ export default function About() {
           {VALEURS.map((valeur) => (
             <span
               key={valeur}
-              className="rounded-full bg-lime px-3 py-1 text-xs font-semibold text-ink"
+              className="rounded-full bg-lavender px-3 py-1 text-xs font-semibold text-violet"
             >
               {valeur}
             </span>

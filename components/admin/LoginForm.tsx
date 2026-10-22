@@ -6,7 +6,7 @@ import { login, type LoginState } from "@/app/admin/actions";
 const initialState: LoginState = {};
 
 const inputClass =
-  "mt-2 w-full rounded-lg border border-line bg-surface px-4 py-2.5 text-foreground outline-none focus:border-accent";
+  "mt-2 w-full rounded-lg border border-line bg-white px-4 py-2.5 text-foreground outline-none transition-shadow focus:border-accent focus:ring-4 focus:ring-lavender";
 
 export default function LoginForm({ next }: { next?: string }) {
   const [state, formAction, pending] = useActionState(login, initialState);
@@ -56,7 +56,7 @@ export default function LoginForm({ next }: { next?: string }) {
       <button
         type="submit"
         disabled={pending}
-        className="mt-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-on-accent transition-colors hover:bg-accent-hover disabled:cursor-wait disabled:opacity-70"
+        className="mt-2 rounded-full bg-accent shadow-md shadow-violet/25 px-6 py-3 text-sm font-semibold text-on-accent transition-colors hover:bg-accent-hover disabled:cursor-wait disabled:opacity-70"
       >
         {pending ? "Connexion…" : "Se connecter"}
       </button>

@@ -15,15 +15,19 @@ export default async function Home() {
 
   return (
     <>
-      <section className="border-b border-line bg-background">
-        <Container className="grid grid-cols-1 items-center gap-12 py-24 sm:py-32 lg:grid-cols-2">
+      <section className="relative overflow-hidden border-b border-line bg-background">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-24 top-1/2 h-[28rem] w-[28rem] -translate-y-1/2 rounded-full bg-lavender blur-3xl"
+        />
+        <Container className="relative grid grid-cols-1 items-center gap-12 py-24 sm:py-32 lg:grid-cols-2">
           <div className="flex flex-col items-start gap-6">
-            <p className="text-sm font-medium uppercase tracking-widest text-highlight">
+            <p className="rounded-full bg-lavender px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-violet">
               Maison de production musicale
             </p>
-            <h1 className="max-w-2xl text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+            <h1 className="max-w-2xl text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
               Nous révélons des artistes, nous produisons des{" "}
-              <span className="text-[var(--mauve-dark)]">émotions</span>
+              <span className="text-violet-bright">émotions</span>
             </h1>
             <p className="max-w-xl text-lg leading-8 text-muted">
               IndigoProduction accompagne ses artistes de l&apos;enregistrement
@@ -32,13 +36,13 @@ export default async function Home() {
             <div className="flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/artistes"
-                className="rounded-full bg-accent px-6 py-3 text-sm font-semibold text-on-accent transition-colors hover:bg-accent-hover"
+                className="rounded-full bg-accent px-7 py-3 text-sm font-semibold text-on-accent shadow-md shadow-violet/25 transition-colors hover:bg-accent-hover"
               >
                 Découvrir nos artistes
               </Link>
               <Link
                 href="/boutique"
-                className="rounded-full border border-line-strong px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:border-accent hover:text-accent"
+                className="rounded-full border border-violet/40 px-7 py-3 text-sm font-semibold text-violet transition-colors hover:border-violet hover:bg-lavender"
               >
                 Voir la boutique
               </Link>
@@ -149,7 +153,7 @@ export default async function Home() {
           </div>
           <Link
             href="/contact"
-            className="rounded-full bg-lime px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-mauve"
+            className="rounded-full bg-lavender px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-lilac"
           >
             Nous contacter
           </Link>

@@ -14,7 +14,7 @@ const FLASH = {
 };
 
 const buttonClass =
-  "rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-on-accent transition-colors hover:bg-accent-hover";
+  "rounded-full bg-accent shadow-md shadow-violet/25 px-5 py-2.5 text-sm font-semibold text-on-accent transition-colors hover:bg-accent-hover";
 
 export default async function AdminShopPage({
   searchParams,
@@ -33,7 +33,7 @@ export default async function AdminShopPage({
   return (
     <div className="flex max-w-4xl flex-col gap-8">
       <div className="flex flex-wrap items-center justify-between gap-4">
-        <h1 className="text-2xl font-semibold text-foreground">Boutique</h1>
+        <h1 className="text-2xl font-bold text-foreground">Boutique</h1>
         <div className="flex flex-wrap gap-3">
           <Link href="/admin/boutique/sorties/nouveau" className={buttonClass}>
             + Ajouter une sortie
@@ -147,7 +147,7 @@ export default async function AdminShopPage({
                 <li>
                   <Link
                     href={`/admin/boutique/produits/nouveau?sortie=${release.id}`}
-                    className="block px-4 py-3 text-sm font-medium text-muted transition-colors hover:bg-surface-strong hover:text-foreground"
+                    className="block px-4 py-3 text-sm font-medium text-muted transition-colors hover:bg-lavender hover:text-violet"
                   >
                     + Ajouter un produit à cette sortie
                   </Link>

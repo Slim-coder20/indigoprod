@@ -43,7 +43,7 @@ function ArtistCard({
             style={{ objectPosition: artist.photoPosition }}
           />
         ) : (
-          <span className="absolute inset-0 flex items-center justify-center text-4xl font-semibold text-lime">
+          <span className="absolute inset-0 flex items-center justify-center text-4xl font-semibold text-lavender">
             {artist.initials}
           </span>
         )}

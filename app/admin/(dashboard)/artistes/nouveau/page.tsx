@@ -7,7 +7,7 @@ export default async function NewArtistPage() {
 
   return (
     <div className="flex flex-col gap-8">
-      <h1 className="text-2xl font-semibold text-foreground">
+      <h1 className="text-2xl font-bold text-foreground">
         Ajouter un artiste
       </h1>
       <ArtistForm

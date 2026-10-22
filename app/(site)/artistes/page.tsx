@@ -13,7 +13,7 @@ export default async function Artistes() {
       </p>
       <h1 className="mt-3 max-w-2xl text-4xl font-semibold tracking-tight text-foreground">
         Le roster Indigo{" "}
-        <span className="text-[var(--mauve-dark)]">Production</span>
+        <span className="text-violet-bright">Production</span>
       </h1>
       <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">
         Des univers musicaux variés, portés par une même exigence artistique.
@@ -39,7 +39,7 @@ export default async function Artistes() {
               </div>
             ) : (
               <div className="flex aspect-[3/2] w-full items-center justify-center bg-ink">
-                <span className="text-4xl font-semibold text-lime">
+                <span className="text-4xl font-semibold text-lavender">
                   {artist.initials}
                 </span>
               </div>

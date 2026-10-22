@@ -44,7 +44,7 @@ export default async function AdminDashboardPage() {
 
   return (
     <div className="flex max-w-4xl flex-col gap-10">
-      <h1 className="text-2xl font-semibold text-foreground">
+      <h1 className="text-2xl font-bold text-foreground">
         Tableau de bord
       </h1>
 
@@ -52,10 +52,10 @@ export default async function AdminDashboardPage() {
         {stats.map((stat) => (
           <div
             key={stat.label}
-            className="rounded-xl border border-line bg-surface p-5"
+            className="rounded-2xl border border-line bg-surface p-5 shadow-sm shadow-violet/5"
           >
             <p className="text-sm text-muted">{stat.label}</p>
-            <p className="mt-1 text-3xl font-semibold text-foreground">
+            <p className="mt-1 text-3xl font-bold text-violet">
               {stat.value}
             </p>
           </div>

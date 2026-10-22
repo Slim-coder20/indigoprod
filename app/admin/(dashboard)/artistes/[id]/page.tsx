@@ -32,7 +32,7 @@ export default async function EditArtistPage({
   return (
     <div className="flex flex-col gap-8">
       <div className="flex flex-wrap items-baseline justify-between gap-4">
-        <h1 className="text-2xl font-semibold text-foreground">
+        <h1 className="text-2xl font-bold text-foreground">
           {artist.name}
         </h1>
         <Link

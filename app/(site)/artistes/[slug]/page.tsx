@@ -68,7 +68,7 @@ export default async function ArtistePage({
             </div>
           ) : (
             <div className="flex aspect-[3/2] w-full items-center justify-center rounded-xl bg-ink">
-              <span className="text-6xl font-semibold text-lime">
+              <span className="text-6xl font-semibold text-lavender">
                 {artist.initials}
               </span>
             </div>

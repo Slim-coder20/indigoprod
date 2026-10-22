@@ -41,7 +41,7 @@ export default function Navbar() {
                 href={link.href}
                 className={`text-sm font-medium transition-colors hover:text-foreground ${
                   active
-                    ? "text-foreground underline decoration-mauve decoration-[3px] underline-offset-8"
+                    ? "text-foreground underline decoration-violet-bright decoration-[3px] underline-offset-8"
                     : "text-muted"
                 }`}
               >
