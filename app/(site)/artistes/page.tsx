@@ -12,7 +12,7 @@ export default async function Artistes() {
         Artistes
       </p>
       <h1 className="mt-3 max-w-2xl text-4xl font-semibold tracking-tight text-foreground">
-        Le roster Indigo{" "}
+        <span className="text-violet-bright">Les Artistes </span> Indigo{" "}
         <span className="text-violet-bright">Production</span>
       </h1>
       <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">
