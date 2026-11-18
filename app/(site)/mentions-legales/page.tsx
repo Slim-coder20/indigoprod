@@ -24,7 +24,13 @@ export default function MentionsLegales() {
             Forme juridique : <Val>{LEGAL.legalForm}</Val>
           </li>
           <li>
+            SIREN : <Val>{LEGAL.siren}</Val>
+          </li>
+          <li>
             SIRET : <Val>{LEGAL.siret}</Val>
+          </li>
+          <li>
+            Code APE : <Val>{LEGAL.ape}</Val>
           </li>
           <li>
             Siège social : <Val>{LEGAL.address}</Val>

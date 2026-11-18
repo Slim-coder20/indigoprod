@@ -9,13 +9,15 @@ export const LEGAL_TODO = "À COMPLÉTER";
 export const LEGAL = {
   brand: "IndigoProduction",
   // Entité qui vend sur la boutique (Indigo Prod ou Indigo Records)
-  companyName: LEGAL_TODO, // raison sociale ou nom de l'entrepreneur
-  legalForm: LEGAL_TODO, // ex. SAS, SARL, entreprise individuelle, association
-  siret: LEGAL_TODO,
-  address: LEGAL_TODO, // adresse du siège (rue, code postal, ville)
-  shareCapital: LEGAL_TODO, // sociétés uniquement, sinon « sans objet »
-  rcs: LEGAL_TODO, // ex. « RCS Tours 123 456 789 », sinon « sans objet »
-  vat: LEGAL_TODO, // n° de TVA intracommunautaire, ou « TVA non applicable, art. 293 B du CGI »
+  companyName: "INDIGO PROD’", // raison sociale ou nom de l'entrepreneur
+  legalForm: "Association déclarée (loi du 1er juillet 1901)",
+  siren: "927 905 802",
+  siret: "927 905 802 00017",
+  ape: "90.01Z — Arts du spectacle vivant",
+  address: "29 rue de la Moquerie, 37000 Tours", // adresse du siège
+  shareCapital: "Sans objet", // sociétés uniquement, sinon « sans objet »
+  rcs: "Répertoire national des associations (RNA) : W372020110", // ex. « RCS Tours 123 456 789 », sinon « sans objet »
+  vat: "TVA non applicable, article 293 B du CGI", // n° de TVA intracommunautaire, ou « TVA non applicable, art. 293 B du CGI »
   publicationDirector: "Noria Bouha",
 
   // Boutique
