@@ -18,6 +18,7 @@ export const LEGAL = {
   shareCapital: "Sans objet", // sociétés uniquement, sinon « sans objet »
   rcs: "Répertoire national des associations (RNA) : W372020110", // ex. « RCS Tours 123 456 789 », sinon « sans objet »
   vat: "TVA non applicable, article 293 B du CGI", // n° de TVA intracommunautaire, ou « TVA non applicable, art. 293 B du CGI »
+  email: "noria@indigoprod.fr", // adresse e-mail publique (mentions légales)
   publicationDirector: "Noria Bouha",
 
   // Boutique

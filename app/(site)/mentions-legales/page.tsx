@@ -46,7 +46,7 @@ export default function MentionsLegales() {
           </li>
           <li>
             Email :{" "}
-            <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
+            <a href={`mailto:${LEGAL.email}`}>{LEGAL.email}</a>
           </li>
           <li>
             Téléphone :{" "}
