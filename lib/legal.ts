@@ -18,13 +18,13 @@ export const LEGAL = {
   shareCapital: "Sans objet", // sociétés uniquement, sinon « sans objet »
   rcs: "Répertoire national des associations (RNA) : W372020110", // ex. « RCS Tours 123 456 789 », sinon « sans objet »
   vat: "TVA non applicable, article 293 B du CGI", // n° de TVA intracommunautaire, ou « TVA non applicable, art. 293 B du CGI »
-  email: "noria@indigoprod.fr", // adresse e-mail publique (mentions légales)
+  email: "contact.indigoprod@gmail.com", // adresse e-mail publique (mentions légales, CGV)
   publicationDirector: "Noria Bouha",
 
   // Boutique
-  deliveryDelay: LEGAL_TODO, // ex. « 5 à 10 jours ouvrés après la commande »
-  carrier: LEGAL_TODO, // ex. « La Poste (Colissimo) »
-  returnAddress: LEGAL_TODO, // adresse de retour (souvent l'adresse du siège)
+  deliveryDelay: "préparation sous 1 à 3 jours ouvrés après paiement, puis délai d'acheminement DPD", // ex. « 5 à 10 jours ouvrés après la commande »
+  carrier: "DPD", // ex. « La Poste (Colissimo) »
+  returnAddress: "29 rue de la Moquerie, 37000 Tours, France", // adresse de retour (souvent l'adresse du siège)
 
   // Médiateur de la consommation (obligatoire pour la vente aux particuliers)
   mediator: { name: LEGAL_TODO, website: LEGAL_TODO },
