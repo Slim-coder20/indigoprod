@@ -337,12 +337,8 @@ export default function Cgv() {
         </p>
         <p>
           Le client conserve ses droits de recours, notamment le droit de recourir
-          gratuitement au médiateur de la consommation :{" "}
-          <strong>
-            <Val>{LEGAL.mediator.name}</Val>
-          </strong>
-          , <Val>{LEGAL.mediator.website}</Val>, ainsi que celui de saisir la
-          juridiction compétente.
+          à la médiation de la consommation dans les conditions légales et celui de
+          saisir la juridiction compétente.
         </p>
       </LegalSection>
 
