@@ -26,12 +26,14 @@ export default async function Home() {
               Maison de production musicale
             </p>
             <h1 className="max-w-2xl text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-              Nous révélons des artistes, nous produisons des{" "}
-              <span className="text-violet-bright">émotions</span>
+              De l’enregistrement à la 
+              <span className="text-violet-bright"> scène</span>
             </h1>
             <p className="max-w-xl text-lg leading-8 text-muted">
-              IndigoProduction accompagne ses artistes de l&apos;enregistrement
-              à la scène : albums, tournées et boutique en ligne.
+              Indigo Prod est une maison de production musicale indépendante.
+              Nous accompagnons les artistes dans la réalisation de leurs
+              albums, la diffusion de leur musique et la production de leurs
+              concerts.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
               <Link

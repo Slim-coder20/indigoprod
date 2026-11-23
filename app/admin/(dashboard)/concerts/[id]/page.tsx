@@ -33,6 +33,7 @@ export default async function EditConcertPage({
           artistId: concert.artistId,
           title: concert.title ?? "",
           venue: concert.venue,
+          venueUrl: concert.venueUrl ?? "",
           city: concert.city,
           date: concert.date.toISOString().slice(0, 10),
           ticketUrl: concert.ticketUrl ?? "",

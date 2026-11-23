@@ -92,7 +92,7 @@ export default async function ArtistePage({
               {artist.role}
             </p>
           )}
-          <h1 className="mt-3 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+          <h1 className="mt-3 font-display text-5xl leading-tight tracking-tight text-foreground sm:text-6xl">
             {artist.name}
           </h1>
           <p className="mt-4 w-fit rounded-full bg-tag px-3 py-0.5 text-xs font-medium text-on-tag">
@@ -107,8 +107,10 @@ export default async function ArtistePage({
       </div>
 
       <section className="mt-16 max-w-3xl">
-        <h2 className="text-2xl font-semibold text-foreground">Biographie</h2>
-        <div className="mt-6 flex flex-col gap-5 text-lg leading-8 text-muted">
+        <h2 className="font-display text-4xl leading-tight text-foreground sm:text-5xl">
+          Biographie
+        </h2>
+        <div className="mt-6 flex flex-col gap-6 font-body text-lg leading-9 text-muted">
           {paragraphs.map((paragraph) => (
             <p key={paragraph.slice(0, 32)}>{paragraph}</p>
           ))}

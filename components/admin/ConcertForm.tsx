@@ -71,6 +71,16 @@ export default function ConcertForm({
         <input type="text" placeholder="Le Temps Machine" {...input("venue")} />
       </Field>
 
+      <Field
+        label="Site du lieu"
+        id="venueUrl"
+        optional
+        error={errors.venueUrl}
+        hint="Lien affiché sur le nom de la salle."
+      >
+        <input type="url" placeholder="https://…" {...input("venueUrl")} />
+      </Field>
+
       <Field label="Ville" id="city" error={errors.city}>
         <input type="text" placeholder="Tours" {...input("city")} />
       </Field>

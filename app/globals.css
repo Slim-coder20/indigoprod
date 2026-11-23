@@ -65,6 +65,8 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-roboto);
+  --font-display: var(--font-instrument-serif), Georgia, serif;
+  --font-body: var(--font-dm-sans), var(--font-geist-sans), sans-serif;
 }
 
 @layer base {

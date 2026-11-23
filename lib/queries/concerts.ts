@@ -8,6 +8,7 @@ export type Concert = {
   artistName: string;
   artistSlug: string;
   venue: string;
+  venueUrl?: string;
   city: string;
   date: string; // AAAA-MM-JJ
   ticketUrl?: string;
@@ -29,6 +30,7 @@ export const getUpcomingConcerts = unstable_cache(
       artistName: concert.artist.name,
       artistSlug: concert.artist.slug,
       venue: concert.venue,
+      venueUrl: concert.venueUrl ?? undefined,
       city: concert.city,
       date: concert.date.toISOString().slice(0, 10),
       ticketUrl: concert.ticketUrl ?? undefined,

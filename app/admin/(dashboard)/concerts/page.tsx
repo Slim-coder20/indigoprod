@@ -102,7 +102,11 @@ function ConcertList({
                   </span>
                 </span>
                 <span className="text-subtle">
-                  {formatConcertDate(concert.date.toISOString().slice(0, 10))}
+                  {formatConcertDate(concert.date.toISOString().slice(0, 10), {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}
                 </span>
               </Link>
             </li>

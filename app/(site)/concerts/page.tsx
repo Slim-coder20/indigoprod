@@ -54,29 +54,34 @@ export default async function Concerts() {
                   </p>
                 )}
                 <p className="text-sm text-muted">
-                  {concert.venue === concert.title
-                    ? concert.city
-                    : `${concert.venue}, ${concert.city}`}
+                  {concert.venue === concert.title ? (
+                    concert.city
+                  ) : (
+                    <>
+                      {concert.venueUrl ? (
+                        <a
+                          href={concert.venueUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-medium text-highlight underline-offset-4 hover:underline"
+                        >
+                          {concert.venue}
+                        </a>
+                      ) : (
+                        concert.venue
+                      )}
+                      {`, ${concert.city}`}
+                    </>
+                  )}
                 </p>
                 <p className="mt-1 text-xs capitalize text-subtle">
-                  {formatConcertDate(concert.date)}
+                  {formatConcertDate(concert.date, {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}
                 </p>
               </div>
-
-              {concert.ticketUrl ? (
-                <a
-                  href={concert.ticketUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-fit rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-on-accent transition-colors hover:bg-accent-hover"
-                >
-                  Billetterie ↗
-                </a>
-              ) : (
-                <span className="w-fit rounded-full border border-line-strong px-4 py-2 text-xs font-semibold text-subtle">
-                  Billetterie bientôt disponible
-                </span>
-              )}
             </li>
           ))}
         </ul>
